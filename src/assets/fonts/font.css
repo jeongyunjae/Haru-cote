@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'CrimsonText';
+  font-style: normal;
+  font-weight: 700;
+  src: local('CrimsonText Bold'),
+    url('./CrimsonTextBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'CrimsonText';
+  font-style: normal;
+  font-weight: 600;
+  src: local('CrimsonText SemiBold'),
+    url('./CrimsonTextSemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'CrimsonText';
+  font-style: normal;
+  font-weight: 400;
+  src: local('CrimsonText Regular'),
+    url('./CrimsonTextRegular.ttf') format('truetype');
+}
