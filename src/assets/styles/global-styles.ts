@@ -103,9 +103,12 @@ const GlobalStyle = createGlobalStyle`
     font-size: 100%;
     font-family: 'CrimsonText', --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     vertical-align: baseline;
-
-
   }
+  html, body{
+    height: 100vh;
+    background-color: #F6F3F2;
+  }
+
   /* HTML5 display-role reset for older browsers */
   article,
   aside,
