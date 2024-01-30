@@ -31,7 +31,7 @@
   --c2: 12px;
 
   --bold: 700;
-  --medium: 500;
+  --medium: 600;
   --regular: 400;
   --light: 300;
 
@@ -41,6 +41,8 @@
   --p1LineHeight: 28px;
   --c1LineHeight: 24px;
   --c2LineHeight: 21px;
+
+  --bgColor: #f6f3f2;
 
   --gray0: #ffffff;
   --gray50: #fafafa;
