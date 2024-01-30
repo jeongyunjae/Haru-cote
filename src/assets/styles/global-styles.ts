@@ -14,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    
   }
 
   html,
