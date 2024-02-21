@@ -34,29 +34,31 @@ export default function Button({ ...props }: ButtonProps) {
   } = useButtonHook(props)
 
   return (
-    <ButtonWrapper
-      className={classNameProps}
-      type={type ?? 'button'}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
-      onMouseOver={handleMouseOver}
-      onMouseOut={handleMouseOut}
-      disabled={disabled || loading}
-      style={{ width, minWidth: width, ...props.style }}
-      {...props}
-    >
-      {loading ? (
-        <Icon name='Logo' />
-      ) : (
-        <>
-          {leftIconName && <Icon name={leftIconName} />}
-          {label}
-          {rightIconName && <Icon name={rightIconName} />}
-        </>
-      )}
-    </ButtonWrapper>
+    <>
+      <ButtonWrapper
+        className={classNameProps}
+        type={type ?? 'button'}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        onMouseOver={handleMouseOver}
+        onMouseOut={handleMouseOut}
+        onClick={props.onClick}
+        disabled={disabled || loading}
+        style={{ width, minWidth: width, ...props.style }}
+      >
+        {loading ? (
+          <Icon name='Logo' />
+        ) : (
+          <>
+            {leftIconName && <Icon name={leftIconName} />}
+            {label}
+            {rightIconName && <Icon name={rightIconName} />}
+          </>
+        )}
+      </ButtonWrapper>
+    </>
   )
 }
 
@@ -73,10 +75,10 @@ const ButtonWrapper = styled.button`
 
   // 버튼 타입
   &.fill_normal {
-    background-color: var(--yellow400);
+    background-color: var(--blue400);
     color: var(--gray0);
     &.active {
-      background-color: var(--yellow500);
+      background-color: var(--blue500);
     }
   }
 
@@ -90,11 +92,11 @@ const ButtonWrapper = styled.button`
   }
 
   &.soft_normal {
-    background-color: var(--yellow100);
+    background-color: var(--blue100);
     color: var(--yellow700);
 
     &.active {
-      background-color: var(--yellow200);
+      background-color: var(--blue200);
     }
   }
 

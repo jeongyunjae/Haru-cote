@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PracticeData from '../data/practiceTestData.json'
 import RealData from '../data/realTestData.json'
 import styled from 'styled-components'
@@ -19,19 +19,20 @@ export default function ShowPickStep({ goToDone }: ShowPickStepProps) {
   ).map(({ problemNumber }) => problemNumber)
   const level4 = RealData.filter((data) => !data.isSolved)
 
-  let randomIndex1 = Math.floor(Math.random() * level1.length)
+  const randomIndex1 = Math.floor(Math.random() * level1.length)
   let randomIndex2_1 = Math.floor(Math.random() * level2.length)
   let randomIndex2_2 = Math.floor(Math.random() * level2.length)
-  let randomIndex3 = Math.floor(Math.random() * level3.length)
+  const randomIndex3 = Math.floor(Math.random() * level3.length)
 
-  // while (randomIndex2_1 === randomIndex2_1) {
-  //   randomIndex2_1 = Math.floor(Math.random() * level2.length)
-  // }
-
+  useEffect(() => {
+    if (randomIndex2_1 == randomIndex2_2) {
+      randomIndex2_2 = Math.floor(Math.random() * level2.length)
+    }
+  }, [randomIndex2_2])
   return (
-    <>
+    <StepWrapper>
       <Level1Wrapper>
-        <h1>하</h1>
+        <h1>난이도: 하</h1>
         <a
           href={`https://www.acmicpc.net/problem/${level1[randomIndex1]}`}
           target='_blank'
@@ -40,7 +41,7 @@ export default function ShowPickStep({ goToDone }: ShowPickStepProps) {
         </a>
       </Level1Wrapper>
       <Level2Wrapper>
-        <h1>중</h1>
+        <h1>난이도: 중</h1>
         <a
           href={`https://www.acmicpc.net/problem/${level2[randomIndex2_1]}`}
           target='_blank'
@@ -56,7 +57,7 @@ export default function ShowPickStep({ goToDone }: ShowPickStepProps) {
         </a>
       </Level2Wrapper>
       <Level3Wrapper>
-        <h1>중상</h1>
+        <h1>난이도: 중상</h1>
         <a
           href={`https://www.acmicpc.net/problem/${level3[randomIndex3]}`}
           target='_blank'
@@ -64,21 +65,35 @@ export default function ShowPickStep({ goToDone }: ShowPickStepProps) {
           {level3[randomIndex3]}
         </a>
       </Level3Wrapper>
-    </>
+    </StepWrapper>
   )
 }
 
-const Level1Wrapper = styled.div`
-  font-size: 24px;
-  padding-bottom: 10px;
+const StepWrapper = styled.section`
+  padding: 0px 12px;
+
+  & > div {
+    margin-bottom: 20px;
+  }
+  div > h1 {
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+
+  div > a {
+    font-size: 18px;
+    text-decoration: underline;
+    color: #000000;
+    margin-bottom: 2px;
+
+    &:hover {
+      color: gray;
+    }
+  }
 `
 
-const Level2Wrapper = styled.div`
-  font-size: 24px;
-  padding-bottom: 10px;
-`
+const Level1Wrapper = styled.div``
 
-const Level3Wrapper = styled.div`
-  font-size: 24px;
-  padding-bottom: 10px;
-`
+const Level2Wrapper = styled.div``
+
+const Level3Wrapper = styled.div``

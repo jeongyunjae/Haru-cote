@@ -14,6 +14,7 @@ const FooterWrapper = styled.footer`
   height: 50px;
   padding: 0px 24px;
   border-top: 1px solid var(--gray800);
+  background-color: var(--bgColor);
   box-sizing: border-box;
   position: relative;
   z-index: 99999;
@@ -23,6 +24,6 @@ const FooterWrapper = styled.footer`
   align-items: center;
 
   & > svg {
-    width: 110px;
+    width: 80px;
   }
 `

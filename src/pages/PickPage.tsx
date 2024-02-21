@@ -71,7 +71,6 @@ const PickWrapper = styled.section`
   min-width: 326px;
   height: calc(100% - 80px);
   border-radius: 16px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 `
 
 const TitleWrapper = styled.div`

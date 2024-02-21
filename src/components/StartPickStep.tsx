@@ -1,64 +1,59 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import Dropdown from './Dropdown/Dropdown'
+import InputButton from './InputButton/InputButton'
 
 export type StartPickStepProps = {
   goToShow?: () => void
 }
 
-const items = ['0', '1', '2', '3', '4']
+const items = [0, 1, 2, 3, 4]
 
 export default function StartPickStep({ goToShow }: StartPickStepProps) {
-  const [selectedLevel1, setSelectedLevel1] = useState<string>(items?.[0])
-  const [selectedLevel2, setSelectedLevel2] = useState<string>(items?.[0])
-  const [selectedLevel3, setSelectedLevel3] = useState<string>(items?.[0])
-  const [selectedLevel4, setSelectedLevel4] = useState<string>(items?.[0])
+  const [selectedLevels, setSelectedLevels] = useState<{
+    level1: number
+    level2: number
+    level3: number
+  }>({
+    level1: items[0],
+    level2: items[0],
+    level3: items[0],
+  })
 
+  const handleLevel1Change = (value: number) => {
+    setSelectedLevels({ ...selectedLevels, level1: value })
+  }
+
+  const handleLevel2Change = (value: number) => {
+    setSelectedLevels({ ...selectedLevels, level2: value })
+  }
+
+  const handleLevel3Change = (value: number) => {
+    setSelectedLevels({ ...selectedLevels, level3: value })
+  }
   return (
     <StartPickStepWrapper>
       <Dropdown
-        label='윤재꺼'
-        trigger={<div>안녕</div>}
+        label='하'
+        trigger={<InputButton value={selectedLevels.level1} />}
         options={items}
-        value={selectedLevel1}
-        onValueChange={setSelectedLevel1}
+        value={selectedLevels.level1}
+        onValueChange={handleLevel1Change}
       />
       <Dropdown
-        label='또잉'
-        trigger={<div>안녕스</div>}
+        label='중'
+        trigger={<InputButton value={selectedLevels.level2} />}
         options={items}
-        value={selectedLevel2}
-        onValueChange={setSelectedLevel2}
+        value={selectedLevels.level2}
+        onValueChange={handleLevel2Change}
       />
-
-      {/* <Select
-        label='Level 1'
-        value={selectedLevel1}
-        onValueChange={setSelectedLevel1}
-        trigger={<div>{selectedLevel1}</div>}
+      <Dropdown
+        label='중상'
+        trigger={<InputButton value={selectedLevels.level3} />}
         options={items}
+        value={selectedLevels.level3}
+        onValueChange={handleLevel3Change}
       />
-      <Select
-        label='Level 2'
-        value={selectedLevel2}
-        onValueChange={setSelectedLevel2}
-        trigger={<div>{selectedLevel2}</div>}
-        options={items}
-      /> */}
-      {/* <Select
-        label='Level 3'
-        value={selectedLevel3}
-        onValueChange={setSelectedLevel3}
-        trigger={<div>{selectedLevel3}</div>}
-        options={items}
-      />
-      <Select
-        label='Level 4'
-        value={selectedLevel4}
-        onValueChange={setSelectedLevel4}
-        trigger={<div>{selectedLevel4}</div>}
-        options={items}
-      /> */}
     </StartPickStepWrapper>
   )
 }

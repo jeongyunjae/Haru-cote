@@ -14,7 +14,7 @@ export default function Header() {
       <NavHeader>
         <NavUl>
           <NavLi>
-            <Link to='/'>Pick</Link>
+            <Link to='/pick'>Pick</Link>
           </NavLi>
           <NavLi>
             <Link to='/watch'>Watch</Link>
@@ -29,11 +29,11 @@ export default function Header() {
 }
 
 const HeaderWrapper = styled.header`
-  height: 82px;
   width: 100%;
   position: sticky;
   z-index: 99999;
   top: 0;
+  background-color: var(--bgColor);
 `
 
 const MainHeader = styled.div`
