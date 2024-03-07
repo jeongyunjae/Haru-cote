@@ -1,25 +1,25 @@
 @font-face {
-  font-family: 'CrimsonText';
+  font-family: 'Pretendard';
   font-style: normal;
   font-weight: 700;
-  src: local('CrimsonText Bold'),
-    url('./assets/fonts/CrimsonTextBold.ttf') format('truetype');
+  src: local('Pretendard Bold'),
+    url('./assets/fonts/PretendardBold.otf') format('truetype');
 }
 
 @font-face {
-  font-family: 'CrimsonText';
+  font-family: 'Pretendard';
   font-style: normal;
   font-weight: 600;
-  src: local('CrimsonText SemiBold'),
-    url('./assets/fonts/CrimsonTextSemiBold.ttf') format('truetype');
+  src: local('Pretendard Medium'),
+    url('./assets/fonts/PretendardMedium.otf') format('truetype');
 }
 
 @font-face {
-  font-family: 'CrimsonText';
+  font-family: 'Pretendard';
   font-style: normal;
   font-weight: 400;
-  src: local('CrimsonText Regular'),
-    url('./assets/fonts/CrimsonTextRegular.ttf') format('truetype');
+  src: local('Pretendard Regular'),
+    url('./assets/fonts/PretendardRegular.otf') format('truetype');
 }
 
 :root {
