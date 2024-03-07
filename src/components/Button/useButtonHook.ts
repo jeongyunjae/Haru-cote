@@ -72,8 +72,8 @@ export function useButtonHook({
     loading && 'loading',
     leftIconName && 'icon_left',
     rightIconName && 'icon_right',
-    halfWidth && 'half-width',
-    fullWidth && 'full-width',
+    halfWidth && 'half_width',
+    fullWidth && 'full_width',
     className
   )
 

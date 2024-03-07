@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useButtonHook } from './useButtonHook'
 import Icon, { IconType } from '../Icon/icon'
 
-export type ButtonSizeType = 'large-block' | 'large' | 'medium' | 'small'
+export type ButtonSizeType = 'large_block' | 'large' | 'medium' | 'small'
 
 export type ButtonProps = {
   label: string
@@ -110,7 +110,7 @@ const ButtonWrapper = styled.button`
   }
 
   // 버튼 사이즈
-  &.large-block,
+  &.large_block,
   &.large {
     height: 48px;
     padding: 0 32px;
@@ -119,7 +119,7 @@ const ButtonWrapper = styled.button`
     border-radius: 16px;
   }
 
-  &.large-block {
+  &.large_block {
     width: 240px;
     min-width: 240px;
   }
@@ -141,11 +141,11 @@ const ButtonWrapper = styled.button`
   }
 
   // 너비 설정
-  &.full-width {
+  &.full_width {
     width: 100%;
   }
 
-  &.half-width {
+  &.half_width {
     width: 50%;
   }
 
@@ -177,7 +177,7 @@ const ButtonWrapper = styled.button`
     margin-left: 8px;
   }
 
-  &.full-width {
+  &.full_width {
     & + & {
       margin: 0;
       margin-top: 8px;

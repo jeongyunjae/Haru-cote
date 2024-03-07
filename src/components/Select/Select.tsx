@@ -5,8 +5,14 @@ import { createPortal } from 'react-dom'
 
 function SelectLabel() {
   const selectState = useContext(SelectContext)
-  return <span>{selectState?.label}</span>
+  return <Label>{selectState?.label}</Label>
 }
+
+const Label = styled.label`
+  display: block;
+  padding-bottom: 4px;
+  font-weight: bold;
+`
 
 type SelectTriggerProps = {
   as: React.ReactNode
@@ -51,27 +57,50 @@ type SelectListProps = {
 
 function SelectList({ children }: SelectListProps) {
   const selectState = useContext(SelectContext)
-  return <ul ref={selectState?.elem}>{children}</ul>
+  return <SelectListUl ref={selectState?.elem}>{children}</SelectListUl>
 }
+
+const SelectListUl = styled.ul`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`
 
 type SelectItemProps = {
   children?: React.ReactNode
   value: number
 } & React.HTMLAttributes<HTMLDivElement>
 
-function SelectItem({ children, value }: SelectItemProps) {
+function SelectItem({ children, value, ...props }: SelectItemProps) {
   const selectState = useContext(SelectContext)
   return (
-    <li
+    <SelectItemLi
+      style={{ ...props }}
       onClick={() => {
         selectState?.onValueChange(value)
         selectState?.toggle()
       }}
     >
       {children}
-    </li>
+    </SelectItemLi>
   )
 }
+
+const SelectItemLi = styled.li`
+  padding: 12px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  &:hover {
+    background-color: var(--gray400);
+  }
+
+  &.is_selected {
+    background-color: var(--gray600);
+  }
+`
 
 type SelectRootProps = {
   children: React.ReactNode
