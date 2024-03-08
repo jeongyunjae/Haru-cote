@@ -1,0 +1,7 @@
+   <path
+        className={strokeClassName}
+        d="M7 10L12 15L17 10"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />

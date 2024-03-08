@@ -1,0 +1,22 @@
+@font-face {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Pretendard Bold'), url('./PretendardBold.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Pretendard Medium'),
+    url('./PretendardMedium.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Pretendard Regular'),
+    url('./PretendardRegular.otf') format('truetype');
+}
