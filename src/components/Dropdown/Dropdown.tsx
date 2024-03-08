@@ -1,26 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Select } from '../Select/Select'
+import InputButton from '../InputButton/InputButton'
 
-export type DropdownProps = {
+export type DropdownProps<U, T> = {
   label: string
-  trigger: React.ReactNode
-  options: number[]
-  value: number
-  onValueChange: (data: number) => void
+  options: U[]
+  value: T
+  onValueChange: (data: T) => void
 } & React.HTMLAttributes<HTMLDivElement>
 
-export default function Dropdown({
+export default function Dropdown<U extends number, T extends number>({
   label,
-  trigger,
   options,
   value,
   onValueChange,
-}: DropdownProps) {
+}: DropdownProps<U, T>) {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+
   return (
-    <Select label={label} value={value} onValueChange={onValueChange}>
+    <Select<T>
+      label={label}
+      value={value}
+      onValueChange={onValueChange}
+      onOpenChange={(data) => setIsOpen(data)}
+    >
       <Select.Label />
-      <Select.Trigger as={trigger} />
-      <div id={label} style={{ position: 'relative' }} />
+      <Select.Trigger
+        as={
+          <InputButton
+            value={value}
+            rightIconName={isOpen ? 'LineArrowUp' : 'LineArrowDown'}
+          />
+        }
+      />
+
+      <div id={label} />
+
       <Select.Content>
         <Select.Viewport>
           <Select.List>

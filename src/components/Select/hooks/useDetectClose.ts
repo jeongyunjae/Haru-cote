@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect } from 'react'
 import { useToggleState } from '../../../hooks/useToggleState'
 
 export type DetectCloseType = {

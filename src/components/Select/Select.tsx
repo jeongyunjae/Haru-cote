@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useRef } from 'react'
+import React, { createContext, useContext, useEffect, useRef } from 'react'
 import useDetectClose from './hooks/useDetectClose'
 import styled from 'styled-components'
 import { createPortal } from 'react-dom'
@@ -11,7 +11,7 @@ function SelectLabel() {
 const Label = styled.label`
   display: block;
   padding-bottom: 4px;
-  font-weight: bold;
+  font-weight: var(--medium);
 `
 
 type SelectTriggerProps = {
@@ -40,6 +40,10 @@ function SelectViewport({ children }: SelectViewportProps) {
   return <Viewport>{children}</Viewport>
 }
 
+const Viewport = styled.div`
+  position: relative;
+`
+
 type SelectContentProps = {
   children?: React.ReactNode
 } & React.HTMLAttributes<HTMLDivElement>
@@ -66,19 +70,20 @@ const SelectListUl = styled.ul`
   flex-direction: column;
 `
 
-type SelectItemProps = {
+type SelectItemProps<T> = {
   children?: React.ReactNode
-  value: number
+  value: T
 } & React.HTMLAttributes<HTMLDivElement>
 
-function SelectItem({ children, value, ...props }: SelectItemProps) {
+function SelectItem<T>({ children, value, ...props }: SelectItemProps<T>) {
   const selectState = useContext(SelectContext)
+  console.log(children)
   return (
     <SelectItemLi
       style={{ ...props }}
       onClick={() => {
-        selectState?.onValueChange(value)
         selectState?.toggle()
+        selectState?.onValueChange(value)
       }}
     >
       {children}
@@ -102,32 +107,39 @@ const SelectItemLi = styled.li`
   }
 `
 
-type SelectRootProps = {
+type SelectRootProps<T> = {
   children: React.ReactNode
   label: string
-  value?: number
-  onValueChange: (data: number) => void
+  value: T
+  onValueChange: (data: T) => void
+  onOpenChange: (data: boolean) => void
 } & React.HTMLAttributes<HTMLDivElement>
 
-export type DetectTypes = {
+export type DetectTypes<T> = {
   isOpen: boolean
   toggle: () => void
   elem: React.RefObject<any>
-} & Omit<SelectRootProps, 'children'>
+} & Omit<SelectRootProps<T>, 'children' | 'onOpenChange'>
 
-const SelectContext = createContext<DetectTypes | null>(null)
+const SelectContext = createContext<DetectTypes<any> | null>(null)
 
-function SelectRoot({
+function SelectRoot<T>({
   children,
   label,
   value,
   onValueChange,
-}: SelectRootProps) {
+  onOpenChange,
+}: SelectRootProps<T>) {
   const elem = useRef<any>(null)
   const { isOpen, toggle } = useDetectClose({
     initialState: false,
     elem: elem,
   })
+
+  useEffect(() => {
+    onOpenChange(isOpen)
+  }, [isOpen, onOpenChange])
+
   return (
     <SelectContext.Provider
       value={{ isOpen, toggle, elem, label, value, onValueChange }}
@@ -145,7 +157,3 @@ export const Select = Object.assign(SelectRoot, {
   List: SelectList,
   Item: SelectItem,
 })
-
-const Viewport = styled.div`
-  position: relative;
-`
