@@ -2,16 +2,17 @@
 
 import React, { ReactElement, ReactNode, useState } from 'react'
 
-export interface StepProps {
-  name: string
+export type FunnelStepName = '문제 선정하기' | '확정하기'
+export type StepProps = {
+  name: FunnelStepName
   children: ReactNode
 }
 
-export interface FunnelProps {
+export type FunnelProps = {
   children: Array<ReactElement<StepProps>>
 }
 
-export const useFunnel = (defaultStep: string) => {
+export const useFunnel = (defaultStep: FunnelStepName) => {
   // state를 통해 현재 스텝을 관리한다.
   // setStep 함수를 통해 현재 스텝을 변경할 수 있다.
   const [step, setStep] = useState(defaultStep)

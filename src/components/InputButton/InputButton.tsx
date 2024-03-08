@@ -28,35 +28,39 @@ export default function InputButton({
         value={value}
         readOnly
       />
-      <>
-        {leftIconName && <Icon name={leftIconName} />}
-        {rightIconName && <Icon name={rightIconName} />}
-      </>
+      {leftIconName && <Icon name={leftIconName} />}
+      {rightIconName && <Icon name={rightIconName} />}
     </InputButtonWrapper>
   )
 }
 
 const InputButtonWrapper = styled.div`
+  width: 100%;
+  height: 40px;
   display: flex;
   align-items: center;
   position: relative;
+  background-color: var(--gray0);
+  transition: all 0.2s ease;
   z-index: 20;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--gray200);
+  }
 
   & > input {
     width: 100%;
     padding: 10px;
+    font-weight: var(--medium);
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    transition: border-color 0.3s ease;
+    background-color: inherit;
+    cursor: inherit;
 
     &:focus {
       border-color: var(--blue600);
       outline: none;
-    }
-
-    &:hover {
-      background-color: var(--gray200);
     }
   }
 
