@@ -4,10 +4,17 @@ import ShowPickStep from '../components/ShowPickStep'
 import { useFunnel } from '../components/Funnel/useFunnel'
 import Button from '../components/Button/Button'
 import { useNavigate } from 'react-router-dom'
+import usePickStore from '../modules/pickStore/usePickStore'
+
+export type levelType = { value: number; isContentOpen: boolean }
 
 export default function PickPage() {
-  const { Funnel, Step, currentStep, setStep } = useFunnel('선정하기')
-
+  const { Funnel, Step, currentStep, setStep } = useFunnel('문제 선정하기')
+  const { levelData } = usePickStore()
+  const sumOfLevels = Object.values(levelData).reduce(
+    (acc, value) => acc + value,
+    0
+  )
   const navigate = useNavigate()
   return (
     <PageWrapper>
@@ -15,8 +22,8 @@ export default function PickPage() {
         <TitleWrapper>{currentStep}</TitleWrapper>
         <FunnelWrapper>
           <Funnel>
-            <Step name='선정하기'>
-              <StartPickStep goToShow={() => setStep('선정하기')} />
+            <Step name='문제 선정하기'>
+              <StartPickStep />
             </Step>
             <Step name='확정하기'>
               <ShowPickStep />
@@ -24,13 +31,14 @@ export default function PickPage() {
           </Funnel>
         </FunnelWrapper>
         <FooterWrapper>
-          {currentStep === '선정하기' ? (
+          {currentStep === '문제 선정하기' ? (
             <Button
-              label='문제 선정'
+              label={`총 ${sumOfLevels}문제 선정하기`}
               size='medium'
               fullWidth
               onClick={() => setStep('확정하기')}
               theme='fill_normal'
+              disabled={sumOfLevels === 0}
             />
           ) : (
             <>
@@ -38,7 +46,7 @@ export default function PickPage() {
                 label='뒤로가기'
                 size='medium'
                 theme='soft_mono'
-                onClick={() => setStep('선정하기')}
+                onClick={() => setStep('문제 선정하기')}
                 halfWidth
               />
               <Button
@@ -60,23 +68,23 @@ const PageWrapper = styled.main`
   width: 100%;
   height: calc(100vh - 50px - 82px);
   position: relative;
-  display: flex;
   align-items: center;
   justify-content: center;
+  display: flex;
 `
 
 const PickWrapper = styled.section`
   position: relative;
   width: 326px;
-  min-width: 326px;
   height: calc(100% - 80px);
+  box-sizing: border-box;
+  padding: 0px 12px;
   border-radius: 16px;
 `
 
 const TitleWrapper = styled.div`
   width: 100%;
   box-sizing: border-box;
-  padding: 0px 12px;
   position: relative;
 
   height: 50px;
@@ -87,7 +95,7 @@ const TitleWrapper = styled.div`
 
   font-size: var(--h3);
   line-height: var(--h3LineHeight);
-  font-weight: var(--medium);
+  font-weight: var(--bold);
 `
 
 const FunnelWrapper = styled.div`
@@ -100,10 +108,6 @@ const FooterWrapper = styled.div`
   width: 100%;
   height: 60px;
   box-sizing: border-box;
-  padding: 0px 12px;
-
-  position: absolute;
-  bottom: 0px;
 
   display: flex;
   align-items: center;

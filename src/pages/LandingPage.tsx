@@ -5,7 +5,7 @@ import Button from '../components/Button/Button'
 export default function LandingPage() {
   return (
     <LandingWrapper>
-      <Button label='윤재' size='large-block' theme='fill_danger' />
+      <Button label='윤재' size='large_block' theme='fill_danger' />
     </LandingWrapper>
   )
 }

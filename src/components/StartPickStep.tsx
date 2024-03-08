@@ -1,58 +1,43 @@
-import React, { useState } from 'react'
 import styled from 'styled-components'
 import Dropdown from './Dropdown/Dropdown'
-import InputButton from './InputButton/InputButton'
+import Divider from './Divider/Divider'
+import usePickStore from '../modules/pickStore/usePickStore'
 
-export type StartPickStepProps = {
-  goToShow?: () => void
-}
+const items: number[] = [0, 1, 2, 3, 4]
 
-const items = [0, 1, 2, 3, 4]
+export default function StartPickStep() {
+  const {
+    levelData: { level1Value, level2Value, level3Value },
+    updateLevelData,
+  } = usePickStore()
 
-export default function StartPickStep({ goToShow }: StartPickStepProps) {
-  const [selectedLevels, setSelectedLevels] = useState<{
-    level1: number
-    level2: number
-    level3: number
-  }>({
-    level1: items[0],
-    level2: items[0],
-    level3: items[0],
-  })
-
-  const handleLevel1Change = (value: number) => {
-    setSelectedLevels({ ...selectedLevels, level1: value })
-  }
-
-  const handleLevel2Change = (value: number) => {
-    setSelectedLevels({ ...selectedLevels, level2: value })
-  }
-
-  const handleLevel3Change = (value: number) => {
-    setSelectedLevels({ ...selectedLevels, level3: value })
-  }
   return (
     <StartPickStepWrapper>
-      <Dropdown
-        label='하'
-        trigger={<InputButton value={selectedLevels.level1} />}
+      <Dropdown<number, number>
+        label='상 문제 수'
         options={items}
-        value={selectedLevels.level1}
-        onValueChange={handleLevel1Change}
+        value={level1Value}
+        onValueChange={(myData: number) =>
+          updateLevelData('level1Value', myData)
+        }
       />
-      <Dropdown
-        label='중'
-        trigger={<InputButton value={selectedLevels.level2} />}
+      <Divider />
+      <Dropdown<number, number>
+        label='중상 문제 수'
         options={items}
-        value={selectedLevels.level2}
-        onValueChange={handleLevel2Change}
+        value={level2Value}
+        onValueChange={(myData: number) =>
+          updateLevelData('level2Value', myData)
+        }
       />
-      <Dropdown
-        label='중상'
-        trigger={<InputButton value={selectedLevels.level3} />}
+      <Divider />
+      <Dropdown<number, number>
+        label='중 문제 수'
         options={items}
-        value={selectedLevels.level3}
-        onValueChange={handleLevel3Change}
+        value={level3Value}
+        onValueChange={(myData: number) =>
+          updateLevelData('level3Value', myData)
+        }
       />
     </StartPickStepWrapper>
   )
@@ -62,4 +47,5 @@ const StartPickStepWrapper = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
+  padding-top: 20px;
 `

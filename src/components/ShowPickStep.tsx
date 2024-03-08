@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import PracticeData from '../data/practiceTestData.json'
-import RealData from '../data/realTestData.json'
 import styled from 'styled-components'
 
 export type ShowPickStepProps = {
@@ -17,7 +16,6 @@ export default function ShowPickStep({ goToDone }: ShowPickStepProps) {
   const level3 = PracticeData.filter(
     ({ level, isSolved }) => level === 3 && !isSolved
   ).map(({ problemNumber }) => problemNumber)
-  const level4 = RealData.filter((data) => !data.isSolved)
 
   const randomIndex1 = Math.floor(Math.random() * level1.length)
   let randomIndex2_1 = Math.floor(Math.random() * level2.length)
