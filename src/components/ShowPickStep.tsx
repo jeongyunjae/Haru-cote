@@ -1,97 +1,99 @@
-import { useEffect } from 'react'
-import PracticeData from '../data/practiceTestData.json'
 import styled from 'styled-components'
+import useProblemsQuery from '../hooks/query/solvedac/useProblemsQuery'
+import { addCommaForArray, isNonEmptyArray } from '../utils/array'
+import { skeletonAnimation } from '../assets/styles/animation'
 
 export type ShowPickStepProps = {
-  goToDone?: () => void
+  problemIdList: number[]
 }
 
-export default function ShowPickStep({ goToDone }: ShowPickStepProps) {
-  const level1 = PracticeData.filter(
-    ({ level, isSolved }) => level === 1 && !isSolved
-  ).map(({ problemNumber }) => problemNumber)
-  const level2 = PracticeData.filter(
-    ({ level, isSolved }) => level === 2 && !isSolved
-  ).map(({ problemNumber }) => problemNumber)
-  const level3 = PracticeData.filter(
-    ({ level, isSolved }) => level === 3 && !isSolved
-  ).map(({ problemNumber }) => problemNumber)
-
-  const randomIndex1 = Math.floor(Math.random() * level1.length)
-  let randomIndex2_1 = Math.floor(Math.random() * level2.length)
-  let randomIndex2_2 = Math.floor(Math.random() * level2.length)
-  const randomIndex3 = Math.floor(Math.random() * level3.length)
-
-  useEffect(() => {
-    if (randomIndex2_1 == randomIndex2_2) {
-      randomIndex2_2 = Math.floor(Math.random() * level2.length)
+export default function ShowPickStep({ problemIdList }: ShowPickStepProps) {
+  const { data: problemList, isLoading } = useProblemsQuery(
+    {
+      problemIds: addCommaForArray(problemIdList),
+    },
+    {
+      enabled: isNonEmptyArray(problemIdList),
     }
-  }, [randomIndex2_2])
+  )
+
   return (
     <StepWrapper>
-      <Level1Wrapper>
-        <h1>난이도: 하</h1>
-        <a
-          href={`https://www.acmicpc.net/problem/${level1[randomIndex1]}`}
-          target='_blank'
-        >
-          {level1[randomIndex1]}
-        </a>
-      </Level1Wrapper>
-      <Level2Wrapper>
-        <h1>난이도: 중</h1>
-        <a
-          href={`https://www.acmicpc.net/problem/${level2[randomIndex2_1]}`}
-          target='_blank'
-        >
-          {level2[randomIndex2_1]}
-        </a>
-        <br />
-        <a
-          href={`https://www.acmicpc.net/problem/${level2[randomIndex2_2]}`}
-          target='_blank'
-        >
-          {level2[randomIndex2_2]}
-        </a>
-      </Level2Wrapper>
-      <Level3Wrapper>
-        <h1>난이도: 중상</h1>
-        <a
-          href={`https://www.acmicpc.net/problem/${level3[randomIndex3]}`}
-          target='_blank'
-        >
-          {level3[randomIndex3]}
-        </a>
-      </Level3Wrapper>
+      <CardWrapper>
+        {isLoading ? (
+          <>
+            {Array.from({ length: 4 }).map(() => (
+              <CardSkeleton />
+            ))}
+          </>
+        ) : (
+          <>
+            {problemList?.map(({ titleKo, level }, _i) => (
+              <Card>
+                <h2>{titleKo}</h2>
+                <span>{level}</span>
+              </Card>
+            ))}
+          </>
+        )}
+      </CardWrapper>
     </StepWrapper>
   )
 }
 
-const StepWrapper = styled.section`
-  padding: 0px 12px;
+const StepWrapper = styled.section``
 
-  & > div {
-    margin-bottom: 20px;
-  }
-  div > h1 {
-    font-size: 22px;
-    margin-bottom: 4px;
-  }
-
-  div > a {
-    font-size: 18px;
-    text-decoration: underline;
-    color: #000000;
-    margin-bottom: 2px;
-
-    &:hover {
-      color: gray;
-    }
-  }
+const CardWrapper = styled.ul`
+  display: flex;
+  flex-direction: column;
 `
 
-const Level1Wrapper = styled.div``
+const CardSkeleton = styled.li`
+  margin: 10px 0px;
+  width: 100%;
+  height: 70px;
+  background-color: var(--gray300);
+  border-radius: 8px;
+  animation: ${skeletonAnimation} 1s ease-in-out infinite;
+`
 
-const Level2Wrapper = styled.div``
+const Card = styled.li`
+  margin: 10px 0px;
+  position: relative;
+  width: 100%;
+  padding: 6px 10px;
+  box-sizing: border-box;
+  height: 70px;
 
-const Level3Wrapper = styled.div``
+  /* background: linear-gradient(to bottom, #d5dee7 0%, #e8ebf2 50%, #e2e7ed 100%),
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.02) 50%,
+      rgba(255, 255, 255, 0.02) 61%,
+      rgba(0, 0, 0, 0.02) 73%
+    ),
+    linear-gradient(33deg, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%);
+  background-blend-mode: normal, color-burn; */
+
+  /* background-image: linear-gradient(-20deg, #f794a4 0%, #fdd6bd 100%); */
+  background-image: linear-gradient(to right, #92fe9d 0%, #00c9ff 100%);
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease-in-out; /* 호버 효과를 부드럽게 만들기 위해 transition 사용 */
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* 호버 시 그림자 추가 */
+  }
+
+  & > h2 {
+    font-size: 18px;
+    color: var(--gray900);
+    line-height: 28px;
+  }
+
+  & > span {
+    font-size: 12px;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+  }
+`
