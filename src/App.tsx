@@ -1,23 +1,40 @@
+import React, { Suspense, lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Layout from './components/Layout'
-import SettingsPage from './pages/SettingsPage'
-import NoMatchPage from './pages/NoMatchPage'
-import WatchPage from './pages/WatchPage'
-import LandingPage from './pages/LandingPage'
-import PickPage from './pages/PickPage'
+
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 function App() {
-  return (
-    <Routes>
-      <Route path='/' element={<Layout />}>
-        <Route index element={<LandingPage />} />
-        <Route path='pick' element={<PickPage />} />
-        <Route path='settings' element={<SettingsPage />} />
-        <Route path='watch' element={<WatchPage />} />
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        cacheTime: Infinity,
+        refetchOnWindowFocus: false,
+        retry: 1,
+      },
+    },
+  })
 
-        <Route path='*' element={<NoMatchPage />} />
-      </Route>
-    </Routes>
+  const LandingPage = lazy(() => import('./pages/LandingPage'))
+  const PickPage = lazy(() => import('./pages/PickPage'))
+  const WatchPage = lazy(() => import('./pages/WatchPage'))
+  const SettingsPage = lazy(() => import('./pages/SettingsPage'))
+  const NoMatchPage = lazy(() => import('./pages/NoMatchPage'))
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Suspense>
+        <Routes>
+          <Route path='/' element={<Layout />}>
+            <Route index element={<LandingPage />} />
+            <Route path='pick' element={<PickPage />} />
+            <Route path='settings' element={<SettingsPage />} />
+            <Route path='watch' element={<WatchPage />} />
+            <Route path='*' element={<NoMatchPage />} />
+          </Route>
+        </Routes>
+      </Suspense>
+    </QueryClientProvider>
   )
 }
 
