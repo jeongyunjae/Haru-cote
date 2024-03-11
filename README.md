@@ -1,27 +1,17 @@
 # Haru-cote
-
 현재 진행하고 있는 코딩스터디 운영 방식을 좀 더 효율적으로 하기 위해 제작한 프로젝트입니다.
 
 ## 실행 방법
+- 패키지 설치: npm install or yarn:
+- 프로젝트 실행: yarn dev
 
-- npm install or yarn: 패키지 설치 
-- yarn dev: 프로젝트 실행
-
-## 기술 스택
+## 주요 기술 스택
 
 ### 모듈 번들러
 - "vite": "^5.0.8"
-
-### 프레임워크
 - "react": "^18.2.0"
-
-### 스타일
 - "styled-components": "6.1.8"
-
-### API 연동
 - "react-query": "3.39.3"
-
-### 상태 관리
 - "zustand": "4.4.7"
 
 ## 주요 기능
