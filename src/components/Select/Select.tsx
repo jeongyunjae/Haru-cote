@@ -10,7 +10,7 @@ function SelectLabel() {
 
 const Label = styled.label`
   display: block;
-  padding-bottom: 4px;
+  padding-bottom: 6px;
   font-weight: var(--medium);
 `
 

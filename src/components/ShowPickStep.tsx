@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import useProblemsQuery from '../hooks/query/solvedac/useProblemsQuery'
 import { addCommaForArray, isNonEmptyArray } from '../utils/common/array'
 import { skeletonAnimation } from '../assets/styles/animation'
-import { SolvedacTierType, tierLevel } from '../utils/solvedac'
+import { tierLevel } from '../utils/solvedac'
 import classNames from 'classnames'
 
 export type ShowPickStepProps = {
@@ -20,7 +20,7 @@ export default function ShowPickStep({ problemIdList }: ShowPickStepProps) {
   )
 
   return (
-    <StepWrapper>
+    <ShowPickStepWrapper>
       <CardWrapper>
         {isLoading ? (
           <>
@@ -39,11 +39,11 @@ export default function ShowPickStep({ problemIdList }: ShowPickStepProps) {
           </>
         )}
       </CardWrapper>
-    </StepWrapper>
+    </ShowPickStepWrapper>
   )
 }
 
-const StepWrapper = styled.section``
+const ShowPickStepWrapper = styled.section``
 
 const CardWrapper = styled.ul`
   display: flex;
@@ -51,24 +51,24 @@ const CardWrapper = styled.ul`
 `
 
 const CardSkeleton = styled.li`
-  margin: 10px 0px;
   width: 100%;
   height: 70px;
+  margin: 10px 0px;
   background-color: var(--gray300);
   border-radius: 8px;
   animation: ${skeletonAnimation} 1s ease-in-out infinite;
 `
 
 const Card = styled.li`
-  margin: 12px 0px;
-  position: relative;
   width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
   height: 80px;
-
+  margin: 8px 0px;
+  padding: 8px 10px;
+  position: relative;
+  box-sizing: border-box;
+  transition: filter 0.3s ease; /* Hover 시 부드러운 전환을 위한 설정 */
+  cursor: pointer;
   border-radius: 8px;
-  transition: box-shadow 0.2s ease-in-out; /* 호버 효과를 부드럽게 만들기 위해 transition 사용 */
 
   &.Unrated {
     background-color: var(--unrated);
@@ -99,20 +99,20 @@ const Card = styled.li`
   }
 
   &:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 추가 */
+    filter: brightness(0.85);
   }
 
   & > h2 {
-    font-size: 16px;
     color: var(--gray0);
+    font-size: 16px;
     line-height: 24px;
   }
 
   & > span {
-    font-size: 12px;
     position: absolute;
-    color: var(--gray0);
     right: 10px;
     bottom: 10px;
+    color: var(--gray0);
+    font-size: 12px;
   }
 `
