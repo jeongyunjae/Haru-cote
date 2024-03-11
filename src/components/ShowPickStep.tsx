@@ -1,7 +1,9 @@
 import styled from 'styled-components'
 import useProblemsQuery from '../hooks/query/solvedac/useProblemsQuery'
-import { addCommaForArray, isNonEmptyArray } from '../utils/array'
+import { addCommaForArray, isNonEmptyArray } from '../utils/common/array'
 import { skeletonAnimation } from '../assets/styles/animation'
+import { SolvedacTierType, tierLevel } from '../utils/solvedac'
+import classNames from 'classnames'
 
 export type ShowPickStepProps = {
   problemIdList: number[]
@@ -29,9 +31,9 @@ export default function ShowPickStep({ problemIdList }: ShowPickStepProps) {
         ) : (
           <>
             {problemList?.map(({ titleKo, level }, _i) => (
-              <Card>
+              <Card className={classNames([tierLevel[level].tier])}>
                 <h2>{titleKo}</h2>
-                <span>{level}</span>
+                <span>{`${tierLevel[level].tier} ${tierLevel[level].level}`}</span>
               </Card>
             ))}
           </>
@@ -58,41 +60,58 @@ const CardSkeleton = styled.li`
 `
 
 const Card = styled.li`
-  margin: 10px 0px;
+  margin: 12px 0px;
   position: relative;
   width: 100%;
-  padding: 6px 10px;
+  padding: 10px;
   box-sizing: border-box;
-  height: 70px;
+  height: 80px;
 
-  /* background: linear-gradient(to bottom, #d5dee7 0%, #e8ebf2 50%, #e2e7ed 100%),
-    linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.02) 50%,
-      rgba(255, 255, 255, 0.02) 61%,
-      rgba(0, 0, 0, 0.02) 73%
-    ),
-    linear-gradient(33deg, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%);
-  background-blend-mode: normal, color-burn; */
-
-  /* background-image: linear-gradient(-20deg, #f794a4 0%, #fdd6bd 100%); */
-  background-image: linear-gradient(to right, #92fe9d 0%, #00c9ff 100%);
   border-radius: 8px;
-  transition: box-shadow 0.3s ease-in-out; /* 호버 효과를 부드럽게 만들기 위해 transition 사용 */
+  transition: box-shadow 0.2s ease-in-out; /* 호버 효과를 부드럽게 만들기 위해 transition 사용 */
+
+  &.Unrated {
+    background-color: var(--unrated);
+  }
+
+  &.Bronze {
+    background-color: var(--bronze);
+  }
+
+  &.Silver {
+    background-color: var(--silver);
+  }
+
+  &.Gold {
+    background-color: var(--gold);
+  }
+
+  &.Platinum {
+    background-color: var(--platinum);
+  }
+
+  &.Diamond {
+    background-color: var(--diamond);
+  }
+
+  &.Ruby {
+    background-color: var(--ruby);
+  }
 
   &:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* 호버 시 그림자 추가 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 추가 */
   }
 
   & > h2 {
-    font-size: 18px;
-    color: var(--gray900);
-    line-height: 28px;
+    font-size: 16px;
+    color: var(--gray0);
+    line-height: 24px;
   }
 
   & > span {
     font-size: 12px;
     position: absolute;
+    color: var(--gray0);
     right: 10px;
     bottom: 10px;
   }
