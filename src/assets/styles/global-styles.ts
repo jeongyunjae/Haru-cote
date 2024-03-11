@@ -107,7 +107,13 @@ const GlobalStyle = createGlobalStyle`
   }
   html, body{
     height: 100vh;
-    background-color: #F6F3F2;
+    background-color: var(--gray0);
+
+    scrollbar-width: none; /* Firefox에 대한 스크롤바 숨김 */
+    -ms-overflow-style: none; /* IE 및 Edge에 대한 스크롤바 숨김 */
+    &::-webkit-scrollbar {
+      display: none; /* Chrome 및 Safari에 대한 스크롤바 숨김 */
+    }
   }
 
   /* HTML5 display-role reset for older browsers */
@@ -144,7 +150,6 @@ const GlobalStyle = createGlobalStyle`
     border-collapse: collapse;
     border-spacing: 0;
   }
-
 `
 
 export default GlobalStyle

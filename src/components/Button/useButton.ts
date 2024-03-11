@@ -2,7 +2,7 @@ import { useState } from 'react'
 import classNames from 'classnames'
 import { ButtonProps } from './Button'
 
-export function useButtonHook({
+export function useButton({
   size,
   theme,
   disabled,

@@ -79,4 +79,14 @@
   --blue500: #002266;
   --blue600: #001657;
   --blue700: #001133;
+
+  --unrated: #2d2d2d;
+  --bronze: #ad5600;
+  --silver: #435f7a;
+  --gold: #ec9a00;
+  --platinum: #27e2a4;
+  --diamond: #00b4fc;
+  --ruby: #ff0062;
+
+  --roseGold: #b76e79;
 }

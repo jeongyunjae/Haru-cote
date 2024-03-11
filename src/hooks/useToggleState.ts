@@ -8,7 +8,7 @@ import { useCallback, useState } from 'react'
 export function useToggleState(
   defaultValue = false
 ): readonly [boolean, () => void] {
-  const [bool, setBool] = useState(defaultValue)
+  const [bool, setBool] = useState<boolean>(defaultValue)
 
   const toggle = useCallback(() => {
     setBool((prevBool) => !prevBool)

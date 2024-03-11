@@ -10,7 +10,7 @@ function SelectLabel() {
 
 const Label = styled.label`
   display: block;
-  padding-bottom: 4px;
+  padding-bottom: 6px;
   font-weight: var(--medium);
 `
 
@@ -77,7 +77,6 @@ type SelectItemProps<T> = {
 
 function SelectItem<T>({ children, value, ...props }: SelectItemProps<T>) {
   const selectState = useContext(SelectContext)
-  console.log(children)
   return (
     <SelectItemLi
       style={{ ...props }}

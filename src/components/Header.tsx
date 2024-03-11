@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 import Icon from './Icon/icon'
 import { Link } from 'react-router-dom'
@@ -31,12 +30,12 @@ export default function Header() {
 const HeaderWrapper = styled.header`
   width: 100%;
   position: sticky;
-  z-index: 99999;
   top: 0;
-  background-color: var(--bgColor);
+  z-index: 99999;
 `
 
 const MainHeader = styled.div`
+  width: 100%;
   height: 50px;
   display: flex;
   justify-content: center;
@@ -49,6 +48,7 @@ const MainHeader = styled.div`
 `
 
 const NavHeader = styled.nav`
+  width: 100%;
   height: 32px;
   border-top: 1px solid var(--gray800);
   border-bottom: 1px solid var(--gray800);
@@ -60,21 +60,21 @@ const NavHeader = styled.nav`
 const NavUl = styled.ul`
   width: 324px;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  flex-direction: row;
 `
 
 const NavLi = styled.li`
   min-width: 80px;
   text-align: center;
   & > a {
+    margin: 0 auto;
     width: fit-content;
     display: block;
-    margin: 0 auto;
+    font-size: 16px;
     color: var(--gray800);
     text-decoration: none;
-    font-size: 16px;
   }
 
   a:hover {
@@ -82,11 +82,12 @@ const NavLi = styled.li`
   }
 
   a::after {
-    content: '';
-    display: block;
-    height: 1px;
     width: 0;
-    background-color: #000;
+    height: 1px;
+    content: '';
+
+    display: block;
+    background-color: var(--gray800);
     transition: width 0.5s;
   }
 

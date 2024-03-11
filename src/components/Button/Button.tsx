@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useButtonHook } from './useButtonHook'
+import { useButton } from './useButton'
 import Icon, { IconType } from '../Icon/icon'
 
 export type ButtonSizeType = 'large_block' | 'large' | 'medium' | 'small'
@@ -31,7 +31,7 @@ export default function Button({ ...props }: ButtonProps) {
     handleTouchStart,
     handleMouseOver,
     handleMouseOut,
-  } = useButtonHook(props)
+  } = useButton(props)
 
   return (
     <>
