@@ -1,3 +1,6 @@
+/**
+    @description 솔브닷의 공식 티어
+   */
 export type SolvedacTierType =
   | 'Unrated'
   | 'Bronze'
@@ -7,6 +10,9 @@ export type SolvedacTierType =
   | 'Diamond'
   | 'Ruby'
 
+/**
+    @description 솔브닷 티어 단계
+   */
 export type SolvedacLevelType = '' | 'V' | 'IV' | 'III' | 'II' | 'I'
 
 export type TierLevelType = {

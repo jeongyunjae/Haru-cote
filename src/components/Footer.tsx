@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 import Icon from './Icon/icon'
 
@@ -14,7 +13,6 @@ const FooterWrapper = styled.footer`
   height: 50px;
   padding: 0px 24px;
   border-top: 1px solid var(--gray800);
-  background-color: var(--bgColor);
   box-sizing: border-box;
   position: relative;
   z-index: 99999;

@@ -1,8 +1,7 @@
-// useFunnel.tsx
-
 import React, { ReactElement, ReactNode, useState } from 'react'
 
 export type FunnelStepName = '문제 선정하기' | '확정하기'
+
 export type StepProps = {
   name: FunnelStepName
   children: ReactNode
@@ -13,14 +12,16 @@ export type FunnelProps = {
 }
 
 export const useFunnel = (defaultStep: FunnelStepName) => {
-  // state를 통해 현재 스텝을 관리한다.
-  // setStep 함수를 통해 현재 스텝을 변경할 수 있다.
-  const [step, setStep] = useState(defaultStep)
+  // state를 통해 현재 스텝을 관리
+  const [step, setStep] = useState<FunnelStepName>(defaultStep)
 
   // 각 단계를 나타내는 Step 컴포넌트
-  // children을 통해 각 스텝의 컨텐츠를 렌더링 한다.
   const Step = (props: StepProps): ReactElement => {
     return <>{props.children}</>
+  }
+
+  const handleStep = (step: FunnelStepName) => {
+    setStep(step)
   }
 
   // 여러 단계의 Step 컴포넌트 중 현재 활성화된 스텝을 렌더링하는 Funnel
@@ -33,5 +34,5 @@ export const useFunnel = (defaultStep: FunnelStepName) => {
     return <>{targetStep}</>
   }
 
-  return { Funnel, Step, setStep, currentStep: step } as const
+  return { Funnel, Step, handleStep, currentStep: step } as const
 }
