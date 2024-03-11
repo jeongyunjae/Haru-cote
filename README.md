@@ -1,6 +1,6 @@
 # Haru-cote
 
-Haru-cote is a project aimed at making coding study sessions more efficient.
+현재 진행하고 있는 코딩스터디 운영 방식을 좀 더 효율적으로 하기 위해 제작한 프로젝트입니다.
 
 ## 실행 방법
 
@@ -30,3 +30,8 @@ Haru-cote is a project aimed at making coding study sessions more efficient.
 - 선정된 문제들에 대한 발표자 선정
 - 실전 코딩테스트 타임워치 (개발 진행 중)
 - JSON 데이터 설정 (개발 진행 중)
+
+## 사용한 FE 방법론
+- Composition Component (합성 컴포넌트)
+- Custom Hook (커스텀 훅)
+- Funnel paging (퍼널 페이징 기법)
