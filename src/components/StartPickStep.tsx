@@ -3,7 +3,7 @@ import Dropdown from './Dropdown/Dropdown'
 import Divider from './Divider/Divider'
 import usePickStore from '../modules/pickStore/usePickStore'
 
-const items: number[] = [0, 1, 2, 3, 4]
+const items: number[] = [0, 1, 2, 3, 4, 5]
 
 export default function StartPickStep() {
   const {
