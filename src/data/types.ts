@@ -15,6 +15,7 @@ export type ProblemPersonType =
    */
 export type PracticeDataType = {
   problemNumber: number
+  titleKo: string
   level: number
   person: ProblemPersonType
   isSolved: boolean
