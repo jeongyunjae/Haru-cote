@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import Layout from './components/Layout'
 
 import { QueryClient, QueryClientProvider } from 'react-query'
+import TempPage from './pages/FallbackPage'
 
 function App() {
   const queryClient = new QueryClient({
@@ -23,7 +24,7 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Suspense>
+      <Suspense fallback={<TempPage />}>
         <Routes>
           <Route path='/' element={<Layout />}>
             <Route index element={<LandingPage />} />
