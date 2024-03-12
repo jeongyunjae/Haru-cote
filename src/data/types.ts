@@ -8,13 +8,13 @@ export type ProblemPersonType =
   | '지은'
   | '사라'
   | '민지'
-  | ''
+  | '멤버명'
 
 /**
     @description 주간 문제 JSON 타입
    */
-export type PracticeDataType = {
-  problemNumber: number
+export type ProblemDataType = {
+  problemId: number
   titleKo: string
   level: number
   person: ProblemPersonType
