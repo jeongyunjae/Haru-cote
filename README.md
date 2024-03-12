@@ -1,30 +1,27 @@
-# React + TypeScript + Vite
+# Haru-cote
+현재 진행하고 있는 코딩스터디 운영 방식을 좀 더 효율적으로 하기 위해 제작한 프로젝트입니다.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 실행 방법
+- 패키지 설치: npm install or yarn:
+- 프로젝트 실행: yarn dev
 
-Currently, two official plugins are available:
+## 주요 기술 스택
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 모듈 번들러
+- "vite": "^5.0.8"
+- "react": "^18.2.0"
+- "styled-components": "6.1.8"
+- "react-query": "3.39.3"
+- "zustand": "4.4.7"
 
-## Expanding the ESLint configuration
+## 주요 기능
+- Solved.ac의 Open API를 활용하여 문제 정보 관리
+- 난이도 별 솔브닷 랜덤 문제 선정
+- 선정된 문제들에 대한 발표자 선정
+- 실전 코딩테스트 타임워치 (개발 진행 중)
+- JSON 데이터 설정 (개발 진행 중)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## 사용한 FE 방법론
+- Composition Component (합성 컴포넌트)
+- Custom Hook (커스텀 훅)
+- Funnel paging (퍼널 페이징 기법)
