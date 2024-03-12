@@ -9,12 +9,5 @@ export default function useProblemsQuery(
   value: GetProblemsParam,
   options: QueryOptionsOf<typeof getProblems> = {}
 ) {
-  return useQuery(
-    createKey(value.problemIds),
-    () => getProblems(value),
-    options
-  )
+  return useQuery(['problems'], () => getProblems(value), options)
 }
-
-const createKey = (id: string) => ['problems', id]
-useProblemsQuery.createKey = createKey
