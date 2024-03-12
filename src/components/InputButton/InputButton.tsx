@@ -36,12 +36,13 @@ export default function InputButton({
 
 const InputButtonWrapper = styled.div`
   width: 100%;
-  height: 40px;
+  height: 44px;
   display: flex;
   align-items: center;
   position: relative;
   background-color: var(--gray0);
   transition: all 0.2s ease;
+  border-radius: 12px;
   z-index: 20;
   cursor: pointer;
   &:hover {
@@ -50,11 +51,13 @@ const InputButtonWrapper = styled.div`
 
   & > input {
     width: 100%;
+    height: 100%;
+    box-sizing: border-box;
     padding: 10px;
     font-weight: var(--medium);
     font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 12px;
     background-color: inherit;
     cursor: inherit;
 

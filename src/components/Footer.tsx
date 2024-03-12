@@ -5,6 +5,7 @@ export default function Footer() {
   return (
     <FooterWrapper>
       <Icon name='Logo' />
+      <div>© 2024 All Rights Reserved.</div>
     </FooterWrapper>
   )
 }
@@ -23,5 +24,11 @@ const FooterWrapper = styled.footer`
 
   & > svg {
     width: 80px;
+  }
+
+  & > div {
+    font-size: 14px;
+    position: absolute;
+    right: 24px;
   }
 `

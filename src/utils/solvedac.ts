@@ -20,6 +20,11 @@ export type TierLevelType = {
   level: SolvedacLevelType
 }
 
+/**
+    @description 주간 푸는 문제 수
+   */
+export const WEEK_PROBLEM_COUNT = 5
+
 export const tierLevel: TierLevelType[] = [
   {
     tier: 'Unrated',

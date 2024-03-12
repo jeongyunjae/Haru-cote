@@ -135,6 +135,11 @@ const GlobalStyle = createGlobalStyle`
   ul {
     list-style: none;
   }
+  li {
+    &::marker {
+      display:none ;
+    }
+  }
   blockquote,
   q {
     quotes: none;

@@ -92,7 +92,8 @@ function SelectItem<T>({ children, value, ...props }: SelectItemProps<T>) {
 
 const SelectItemLi = styled.li`
   padding: 12px;
-  height: 24px;
+  height: 44px;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   cursor: pointer;

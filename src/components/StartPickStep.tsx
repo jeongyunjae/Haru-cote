@@ -45,7 +45,15 @@ export default function StartPickStep() {
 
 const StartPickStepWrapper = styled.section`
   width: 100%;
+  height: 100%;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   padding-top: 20px;
+
+  scrollbar-width: none; /* Firefox에 대한 스크롤바 숨김 */
+  -ms-overflow-style: none; /* IE 및 Edge에 대한 스크롤바 숨김 */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome 및 Safari에 대한 스크롤바 숨김 */
+  }
 `

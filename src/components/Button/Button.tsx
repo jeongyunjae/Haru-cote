@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useButton } from './useButton'
+import { useButton } from './hooks/useButton'
 import Icon, { IconType } from '../Icon/icon'
 
 export type ButtonSizeType = 'large_block' | 'large' | 'medium' | 'small'
