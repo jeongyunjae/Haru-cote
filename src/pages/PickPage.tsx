@@ -75,7 +75,7 @@ export default function PickPage() {
                 handleStep('확정하기')
               }}
               theme='fill_normal'
-              disabled={sumOfLevels !== WEEK_PROBLEM_COUNT}
+              disabled={sumOfLevels === 0}
             />
           ) : (
             <>

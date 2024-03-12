@@ -116,7 +116,6 @@ const CardLi = styled.li`
   box-sizing: border-box;
   transition: filter 0.3s ease;
   border-radius: 12px;
-  cursor: pointer;
 
   &.Unrated {
     background-color: var(--unrated);
