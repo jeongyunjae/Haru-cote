@@ -5,22 +5,49 @@ import StartPickStep from '../components/StartPickStep'
 import ShowPickStep from '../components/ShowPickStep'
 import { useFunnel } from '../components/Funnel/useFunnel'
 import Button from '../components/Button/Button'
-import { usePick } from './hooks/usePick'
+import { WEEK_PROBLEM_COUNT } from '../utils/solvedac'
+import usePickStore from '../modules/pickStore/usePickStore'
+import { useState } from 'react'
+import { getRandomData } from '../utils/common/array'
+import { useQueryClient } from 'react-query'
+import { ProblemResType } from '../lib/api/solvedac/getProblems'
+import { problemsData } from '../data/problemsData'
 
 export type levelType = { value: number; isContentOpen: boolean }
 
 export default function PickPage() {
   const navigate = useNavigate()
   const { Funnel, Step, currentStep, handleStep } = useFunnel('문제 선정하기')
-  const {
-    problemIdList,
-    sumOfLevels,
-    handleChoiceButtonClick,
-    WEEK_PROBLEM_COUNT,
-  } = usePick({
-    handleStep,
-  })
+  const { levelData } = usePickStore()
+  const [problemIdList, setProblemIdList] = useState<number[]>([])
+  const sumOfLevels = Object.values(levelData).reduce(
+    (acc, value) => acc + value,
+    0
+  )
 
+  const queryClient = useQueryClient()
+
+  const handleThisWeekDataChange = () => {
+    const cachedData: ProblemResType[] | undefined =
+      queryClient.getQueryData('problems')
+    if (!cachedData) return null
+
+    // cachedData 배열을 해시맵으로 변환
+    const mapA = new Map(
+      cachedData.map(({ problemId, titleKo }) => [problemId, titleKo])
+    )
+
+    // ProblemsData 배열을 순회하면서 해시맵에서 일치하는 값 찾아 업데이트
+    problemsData.forEach((data) => {
+      if (mapA.has(data.problemId)) {
+        data.titleKo = mapA.get(data.problemId) || ''
+        data.isThisWeek = true
+        data.isSolved = true
+      } else {
+        data.isThisWeek = false
+      }
+    })
+  }
   return (
     <PageWrapper>
       <PickWrapper>
@@ -43,7 +70,10 @@ export default function PickPage() {
               label={`총 ${sumOfLevels}문제 선정하기`}
               size='medium'
               fullWidth
-              onClick={handleChoiceButtonClick}
+              onClick={() => {
+                setProblemIdList([...getRandomData(levelData)])
+                handleStep('확정하기')
+              }}
               theme='fill_normal'
               disabled={sumOfLevels !== WEEK_PROBLEM_COUNT}
             />
@@ -60,7 +90,10 @@ export default function PickPage() {
                 label='확정하기'
                 size='medium'
                 theme='fill_normal'
-                onClick={() => navigate('/')}
+                onClick={() => {
+                  handleThisWeekDataChange()
+                  navigate('/')
+                }}
                 halfWidth
               />
             </>
@@ -81,10 +114,10 @@ const PageWrapper = styled.main`
 `
 
 const PickWrapper = styled.section`
-  width: 326px;
+  width: 332px;
   height: calc(100% - 80px);
   position: relative;
-  padding: 18px 12px;
+  padding: 24px 20px;
   box-sizing: border-box;
   background-color: var(--gray100);
   border-radius: 20px;
@@ -97,7 +130,7 @@ const TitleWrapper = styled.div`
   box-sizing: border-box;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 
   font-size: var(--h3);
   font-weight: var(--bold);
@@ -107,16 +140,8 @@ const TitleWrapper = styled.div`
 const MainWrapper = styled.div`
   /* 40px: title, 60px: footer */
   height: calc(100% - 40px - 60px);
-  max-height: 500px;
   margin-bottom: 12px;
   box-sizing: border-box;
-  overflow-y: auto;
-
-  scrollbar-width: none; /* Firefox에 대한 스크롤바 숨김 */
-  -ms-overflow-style: none; /* IE 및 Edge에 대한 스크롤바 숨김 */
-  &::-webkit-scrollbar {
-    display: none; /* Chrome 및 Safari에 대한 스크롤바 숨김 */
-  }
 `
 
 const FooterWrapper = styled.div`

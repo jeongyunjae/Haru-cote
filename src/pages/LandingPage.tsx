@@ -1,15 +1,21 @@
 import styled from 'styled-components'
-import practiceData from '../data/practiceTestData.json'
 import ProblemCard from '../components/ProblemCard/ProblemCard'
+import { problemsData } from '../data/problemsData'
 
 export default function LandingPage() {
   return (
     <LandingWrapper>
       <CardWrapper>
-        {practiceData
+        {problemsData
           .filter(({ isThisWeek }) => isThisWeek)
-          .map(({ level }) => (
-            <ProblemCard level={level} />
+          .map(({ problemId, level, titleKo, person }, _i) => (
+            <ProblemCard
+              key={problemId}
+              problemId={problemId}
+              level={level}
+              titleKo={titleKo}
+              person={person}
+            />
           ))}
       </CardWrapper>
     </LandingWrapper>
@@ -29,6 +35,5 @@ const CardWrapper = styled.ul`
   display: flex;
   flex-direction: row;
   max-width: 1080px;
-
   gap: 12px;
 `

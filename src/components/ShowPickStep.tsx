@@ -1,18 +1,34 @@
 import styled from 'styled-components'
 import useProblemsQuery from '../hooks/query/solvedac/useProblemsQuery'
-import { addCommaForArray, isNonEmptyArray } from '../utils/common/array'
+import {
+  addCommaForArray,
+  getRandomData,
+  isNonEmptyArray,
+} from '../utils/common/array'
 import { skeletonAnimation } from '../assets/styles/animation'
 import { tierLevel } from '../utils/solvedac'
 import classNames from 'classnames'
+import Button from './Button/Button'
+import usePickStore from '../modules/pickStore/usePickStore'
+import { useState } from 'react'
 
 export type ShowPickStepProps = {
   problemIdList: number[]
 }
 
 export default function ShowPickStep({ problemIdList }: ShowPickStepProps) {
-  const { data: problemList, isLoading } = useProblemsQuery(
+  const { levelData } = usePickStore()
+  const [problemIdsState, setProblemIdsState] =
+    useState<number[]>(problemIdList)
+
+  const {
+    data: problemList,
+    isLoading,
+    isFetching,
+    refetch,
+  } = useProblemsQuery(
     {
-      problemIds: addCommaForArray(problemIdList),
+      problemIds: addCommaForArray(problemIdsState),
     },
     {
       enabled: isNonEmptyArray(problemIdList),
@@ -21,54 +37,86 @@ export default function ShowPickStep({ problemIdList }: ShowPickStepProps) {
 
   return (
     <ShowPickStepWrapper>
-      <CardWrapper>
-        {isLoading ? (
+      <ReSelectButtonWrapper>
+        <Button
+          label='다시 선정'
+          size='small'
+          theme='soft_mono'
+          onClick={() => {
+            setProblemIdsState([...getRandomData(levelData)])
+            refetch()
+          }}
+        />
+      </ReSelectButtonWrapper>
+      <CardUl>
+        {isLoading || isFetching ? (
           <>
-            {Array.from({ length: 4 }).map(() => (
-              <CardSkeleton />
+            {Array.from({ length: 4 }).map((_, _i) => (
+              <CardSkeleton key={_i} />
             ))}
           </>
         ) : (
           <>
-            {problemList?.map(({ titleKo, level }, _i) => (
-              <Card className={classNames([tierLevel[level].tier])}>
+            {problemList?.map(({ titleKo, level, problemId }, _i) => (
+              <CardLi
+                key={problemId}
+                className={classNames([tierLevel[level].tier])}
+              >
                 <h2>{titleKo}</h2>
                 <span>{`${tierLevel[level].tier} ${tierLevel[level].level}`}</span>
-              </Card>
+              </CardLi>
             ))}
           </>
         )}
-      </CardWrapper>
+      </CardUl>
     </ShowPickStepWrapper>
   )
 }
 
-const ShowPickStepWrapper = styled.section``
+const ShowPickStepWrapper = styled.section`
+  width: 100%;
+  position: relative;
+  height: 100%;
+`
 
-const CardWrapper = styled.ul`
+const ReSelectButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 14px;
+`
+
+const CardUl = styled.ul`
   display: flex;
   flex-direction: column;
+  gap: 18px;
+  height: calc(100% - 46px);
+
+  overflow-y: scroll;
+
+  scrollbar-width: none; /* Firefox에 대한 스크롤바 숨김 */
+  -ms-overflow-style: none; /* IE 및 Edge에 대한 스크롤바 숨김 */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome 및 Safari에 대한 스크롤바 숨김 */
+  }
 `
 
 const CardSkeleton = styled.li`
   width: 100%;
-  height: 70px;
-  margin: 10px 0px;
+  min-height: 74px;
   background-color: var(--gray300);
-  border-radius: 8px;
+  border-radius: 12px;
   animation: ${skeletonAnimation} 1s ease-in-out infinite;
 `
 
-const Card = styled.li`
+const CardLi = styled.li`
   width: 100%;
-  height: 80px;
-  margin: 8px 0px;
+  min-height: 74px;
   padding: 8px 10px;
   position: relative;
   box-sizing: border-box;
-  transition: filter 0.3s ease; /* Hover 시 부드러운 전환을 위한 설정 */
+  transition: filter 0.3s ease;
+  border-radius: 12px;
   cursor: pointer;
-  border-radius: 8px;
 
   &.Unrated {
     background-color: var(--unrated);
