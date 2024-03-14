@@ -39,8 +39,8 @@ const ContainerWrapper = styled.div`
   width: 206px;
   height: 300px;
   position: relative;
-  transition: all 0.1s;
   display: flex;
+  transition: all 0.1s;
   justify-content: center;
   align-items: center;
   cursor: pointer;
