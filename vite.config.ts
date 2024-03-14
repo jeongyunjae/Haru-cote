@@ -10,7 +10,7 @@ export default defineConfig({
         target:
           process.env.NODE_ENV === 'development'
             ? 'http://localhost:3080'
-            : 'https://port-0-haru-cote-server-fi1xh2bltqnoclo.sel5.cloudtype.app',
+            : 'https://port-0-haru-cote-server-fi1xh2bltqnoclo.sel5.cloudtype.app:3080/',
         changeOrigin: true,
       },
     },
