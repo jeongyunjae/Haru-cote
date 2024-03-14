@@ -1,39 +1,24 @@
 import styled from 'styled-components'
 import useProblemsQuery from '../hooks/query/solvedac/useProblemsQuery'
-import {
-  addCommaForArray,
-  getRandomData,
-  isNonEmptyArray,
-} from '../utils/common/array'
+
 import { skeletonAnimation } from '../assets/styles/animation'
 import { tierLevel } from '../utils/solvedac'
 import classNames from 'classnames'
 import Button from './Button/Button'
 import usePickStore from '../modules/pickStore/usePickStore'
-import { useState } from 'react'
 
-export type ShowPickStepProps = {
-  problemIdList: number[]
-}
+export type ShowPickStepProps = {}
 
-export default function ShowPickStep({ problemIdList }: ShowPickStepProps) {
+export default function ShowPickStep() {
   const { levelData } = usePickStore()
-  const [problemIdsState, setProblemIdsState] =
-    useState<number[]>(problemIdList)
-
   const {
     data: problemList,
     isLoading,
     isFetching,
     refetch,
-  } = useProblemsQuery(
-    {
-      problemIds: addCommaForArray(problemIdsState),
-    },
-    {
-      enabled: isNonEmptyArray(problemIdList),
-    }
-  )
+  } = useProblemsQuery({
+    levelData: levelData,
+  })
 
   return (
     <ShowPickStepWrapper>
@@ -43,7 +28,6 @@ export default function ShowPickStep({ problemIdList }: ShowPickStepProps) {
           size='small'
           theme='soft_mono'
           onClick={() => {
-            setProblemIdsState([...getRandomData(levelData)])
             refetch()
           }}
         />

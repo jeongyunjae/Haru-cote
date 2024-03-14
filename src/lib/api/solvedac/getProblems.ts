@@ -1,17 +1,17 @@
+import { PickLevelDataType } from '../../../modules/pickStore/usePickStore'
 import client from '../../client'
 
 export type GetProblemsParam = {
-  problemIds: string
+  levelData: PickLevelDataType
 }
 
-export async function getProblems({ problemIds }: GetProblemsParam) {
+export async function getProblems({ levelData }: GetProblemsParam) {
   const response = await client.get<ProblemResType[]>(
-    `/api/v3/problem/lookup`,
+    `/api/v1/problem/this-week`,
     {
-      params: { problemIds },
+      params: levelData,
     }
   )
-
   return response.data
 }
 
