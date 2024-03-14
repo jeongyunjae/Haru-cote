@@ -6,14 +6,14 @@ import { ProblemPersonType } from '../../data/types'
 export type ProblemCardProps = {
   problemId: number
   level?: number
-  titleKo?: string
+  title?: string
   person: ProblemPersonType
 }
 
 export default function ProblemCard({
   problemId,
   level = 0,
-  titleKo = '',
+  title = '',
   person,
 }: ProblemCardProps) {
   const { containerRef, overlayRef } = useCard()
@@ -27,7 +27,7 @@ export default function ProblemCard({
     >
       <Overlay ref={overlayRef} />
       <Card className={classNames([`level${level}`])}>
-        <span className='title'>{titleKo}</span>
+        <span className='title'>{title}</span>
         <span className='level'>{`level ${level}`}</span>
         <span className='person'>{person}</span>
       </Card>
@@ -37,7 +37,7 @@ export default function ProblemCard({
 
 const ContainerWrapper = styled.div`
   width: 206px;
-  height: 276px;
+  height: 300px;
   position: relative;
   transition: all 0.1s;
   display: flex;

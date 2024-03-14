@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import useProblemsQuery from '../hooks/query/solvedac/useProblemsQuery'
+import useProblemsQuery from '../hooks/query/problems/useCandidateProblemsQuery'
 
 import { skeletonAnimation } from '../assets/styles/animation'
 import { tierLevel } from '../utils/solvedac'
