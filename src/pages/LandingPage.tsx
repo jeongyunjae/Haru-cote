@@ -3,6 +3,7 @@ import ProblemCard from '../components/ProblemCard/ProblemCard'
 import { problemsData } from '../data/problemsData'
 
 export default function LandingPage() {
+  console.log(process.env.NODE_ENV, window.location.origin)
   return (
     <LandingWrapper>
       <CardWrapper>
