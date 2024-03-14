@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, useState } from 'react'
+import { ReactElement, ReactNode, useState } from 'react'
 
 export type FunnelStepName = '문제 선정하기' | '확정하기'
 
