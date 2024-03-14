@@ -9,14 +9,9 @@ export default defineConfig({
       '/api': {
         target:
           process.env.NODE_ENV === 'development'
-            ? 'http://localhost:3080/api'
-            : 'https://port-0-haru-cote-server-fi1xh2bltqnoclo.sel5.cloudtype.app:3080/api',
+            ? 'http://localhost:3080'
+            : 'https://port-0-haru-cote-server-fi1xh2bltqnoclo.sel5.cloudtype.app:3080',
         changeOrigin: true,
-        rewrite: (path) => {
-          // 원래 요청의 프로토콜과 호스트를 유지한 채로 포트만 변경
-          const newPath = path.replace(/^\/api/, '')
-          return newPath
-        },
       },
     },
   },
