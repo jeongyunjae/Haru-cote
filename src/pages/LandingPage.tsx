@@ -1,23 +1,34 @@
 import styled from 'styled-components'
 import ProblemCard from '../components/ProblemCard/ProblemCard'
-import { problemsData } from '../data/problemsData'
+import useThisWeekProblemsQuery from '../hooks/query/problems/useThisWeekProblemsQuery'
+import { skeletonAnimation } from '../assets/styles/animation'
 
 export default function LandingPage() {
-  console.log(process.env.NODE_ENV, window.location.origin)
+  const { data: thisWeekProblemsList, isLoading } = useThisWeekProblemsQuery()
   return (
     <LandingWrapper>
       <CardWrapper>
-        {problemsData
-          .filter(({ isThisWeek }) => isThisWeek)
-          .map(({ problemId, level, titleKo, person }, _i) => (
-            <ProblemCard
-              key={problemId}
-              problemId={problemId}
-              level={level}
-              titleKo={titleKo}
-              person={person}
-            />
-          ))}
+        {isLoading ? (
+          <>
+            {Array.from({ length: 5 }).map((_, _i) => (
+              <CardSkeleton key={_i} />
+            ))}
+          </>
+        ) : (
+          <>
+            {thisWeekProblemsList?.map(
+              ({ problemId, level, title, person }, _i) => (
+                <ProblemCard
+                  key={problemId}
+                  problemId={problemId}
+                  level={level}
+                  title={title}
+                  person={person}
+                />
+              )
+            )}
+          </>
+        )}
       </CardWrapper>
     </LandingWrapper>
   )
@@ -32,11 +43,12 @@ const LandingWrapper = styled.main`
 `
 
 const CardWrapper = styled.ul`
-  margin-top: 60px;
+  margin-top: 50px;
   display: flex;
   flex-direction: row;
   max-width: 1080px;
   overflow-x: scroll;
+  overflow-y: hidden;
   gap: 12px;
 
   scrollbar-width: none; /* Firefox에 대한 스크롤바 숨김 */
@@ -44,4 +56,15 @@ const CardWrapper = styled.ul`
   &::-webkit-scrollbar {
     display: none; /* Chrome 및 Safari에 대한 스크롤바 숨김 */
   }
+`
+const CardSkeleton = styled.li`
+  margin: 30px 13px;
+  width: 180px;
+  height: 240px;
+  padding: 16px;
+  box-sizing: border-box;
+  background-size: cover;
+  background-color: var(--gray300);
+  border-radius: 24px;
+  animation: ${skeletonAnimation} 1s ease-in-out infinite;
 `

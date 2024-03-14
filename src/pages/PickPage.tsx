@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 import StartPickStep from '../components/StartPickStep'
@@ -7,42 +6,36 @@ import { useFunnel } from '../components/Funnel/useFunnel'
 import Button from '../components/Button/Button'
 import usePickStore from '../modules/pickStore/usePickStore'
 import { useQueryClient } from 'react-query'
-import { ProblemResType } from '../lib/api/solvedac/getProblems'
-import { problemsData } from '../data/problemsData'
+import { ProblemResType } from '../lib/api/problems/getCandidateProblems'
+import usePostThisWeekProblems from '../hooks/query/problems/usePostThisWeekProblems'
+import { PostThisWeekProblemsReq } from '../lib/api/problems/postThisWeekProblems'
 
 export type levelType = { value: number; isContentOpen: boolean }
 
 export default function PickPage() {
-  const navigate = useNavigate()
   const { Funnel, Step, currentStep, handleStep } = useFunnel('문제 선정하기')
   const { levelData } = usePickStore()
+  const queryClient = useQueryClient()
+  const { mutateAsync: mutatePostThisWeekProblems, isLoading } =
+    usePostThisWeekProblems()
   const sumOfLevels = Object.values(levelData).reduce(
     (acc, value) => acc + value,
     0
   )
 
-  const queryClient = useQueryClient()
-
-  const handleThisWeekDataChange = () => {
+  const handleThisWeekDataChange = async () => {
     const cachedData: ProblemResType[] | undefined =
       queryClient.getQueryData('problems')
     if (!cachedData) return null
 
     // cachedData 배열을 해시맵으로 변환
-    const mapA = new Map(
-      cachedData.map(({ problemId, titleKo }) => [problemId, titleKo])
+    const mapA: PostThisWeekProblemsReq[] = cachedData.map(
+      ({ problemId, titleKo }) => {
+        return { problemId: problemId, title: titleKo }
+      }
     )
 
-    // ProblemsData 배열을 순회하면서 해시맵에서 일치하는 값 찾아 업데이트
-    problemsData.forEach((data) => {
-      if (mapA.has(data.problemId)) {
-        data.titleKo = mapA.get(data.problemId) || ''
-        data.isThisWeek = true
-        data.isSolved = true
-      } else {
-        data.isThisWeek = false
-      }
-    })
+    await mutatePostThisWeekProblems([...mapA])
   }
   return (
     <PageWrapper>
@@ -69,6 +62,7 @@ export default function PickPage() {
               onClick={() => {
                 handleStep('확정하기')
               }}
+              loading={isLoading}
               theme='fill_normal'
               disabled={sumOfLevels === 0}
             />
@@ -85,10 +79,7 @@ export default function PickPage() {
                 label='확정하기'
                 size='medium'
                 theme='fill_normal'
-                onClick={() => {
-                  handleThisWeekDataChange()
-                  navigate('/')
-                }}
+                onClick={handleThisWeekDataChange}
                 halfWidth
               />
             </>
