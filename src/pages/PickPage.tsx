@@ -6,8 +6,6 @@ import ShowPickStep from '../components/ShowPickStep'
 import { useFunnel } from '../components/Funnel/useFunnel'
 import Button from '../components/Button/Button'
 import usePickStore from '../modules/pickStore/usePickStore'
-import { useState } from 'react'
-import { getRandomData } from '../utils/common/array'
 import { useQueryClient } from 'react-query'
 import { ProblemResType } from '../lib/api/solvedac/getProblems'
 import { problemsData } from '../data/problemsData'
@@ -18,7 +16,6 @@ export default function PickPage() {
   const navigate = useNavigate()
   const { Funnel, Step, currentStep, handleStep } = useFunnel('문제 선정하기')
   const { levelData } = usePickStore()
-  const [problemIdList, setProblemIdList] = useState<number[]>([])
   const sumOfLevels = Object.values(levelData).reduce(
     (acc, value) => acc + value,
     0
@@ -58,7 +55,7 @@ export default function PickPage() {
               <StartPickStep />
             </Step>
             <Step name='확정하기'>
-              <ShowPickStep problemIdList={problemIdList} />
+              <ShowPickStep />
             </Step>
           </Funnel>
         </MainWrapper>
@@ -70,7 +67,6 @@ export default function PickPage() {
               size='medium'
               fullWidth
               onClick={() => {
-                setProblemIdList([...getRandomData(levelData)])
                 handleStep('확정하기')
               }}
               theme='fill_normal'
