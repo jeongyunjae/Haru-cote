@@ -22,7 +22,7 @@ const HrWrapper = styled.hr`
 
   &.horizontal {
     width: 100%;
-    height: 1px;
+    min-height: 1px;
 
     &.small {
       margin: 16px 0px;
@@ -38,7 +38,7 @@ const HrWrapper = styled.hr`
   }
 
   &.vertical {
-    width: 1px;
+    min-width: 1px;
     height: 100%;
 
     &.small {
