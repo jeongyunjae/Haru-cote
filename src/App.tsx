@@ -1,8 +1,8 @@
 import { Suspense, lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import Layout from './components/Layout'
-
 import { QueryClient, QueryClientProvider } from 'react-query'
+
+import Layout from './components/Layout'
 import FallbackPage from './pages/FallbackPage'
 
 function App() {
