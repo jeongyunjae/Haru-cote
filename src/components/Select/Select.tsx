@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useRef } from 'react'
-import useDetectClose from './hooks/useDetectClose'
-import styled from 'styled-components'
 import { createPortal } from 'react-dom'
+import styled from 'styled-components'
+import useDetectClose from './hooks/useDetectClose'
 
 function SelectLabel() {
   const selectState = useContext(SelectContext)

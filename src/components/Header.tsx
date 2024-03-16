@@ -32,6 +32,7 @@ const HeaderWrapper = styled.header`
   position: sticky;
   top: 0;
   z-index: 99999;
+  background-color: var(--gray0);
 `
 
 const MainHeader = styled.div`

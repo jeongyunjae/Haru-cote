@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { useCard } from './hooks/useCard'
 import classNames from 'classnames'
+import { useCard } from './hooks/useCard'
 import { ProblemPersonType } from '../../data/types'
 
 export type ProblemCardProps = {

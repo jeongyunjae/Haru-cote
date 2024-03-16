@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import Icon, { IconType } from '../Icon/icon'
 import classNames from 'classnames'
+import Icon, { IconType } from '../Icon/icon'
 
 export type InputButtonProps = {
   value: string | number

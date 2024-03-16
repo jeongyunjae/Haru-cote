@@ -1,11 +1,12 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import useProblemsQuery from '../hooks/query/problems/useCandidateProblemsQuery'
+import classNames from 'classnames'
 
 import { skeletonAnimation } from '../assets/styles/animation'
 import { tierLevel } from '../utils/solvedac'
-import classNames from 'classnames'
 import Button from './Button/Button'
 import usePickStore from '../modules/pickStore/usePickStore'
+import { mediaQuery } from '../assets/styles/mediaQuery'
 
 export type ShowPickStepProps = {}
 
@@ -90,6 +91,10 @@ const CardSkeleton = styled.li`
   background-color: var(--gray300);
   border-radius: 12px;
   animation: ${skeletonAnimation} 1s ease-in-out infinite;
+
+  ${mediaQuery('mobile')(css`
+    min-height: 80px;
+  `)}
 `
 
 const CardLi = styled.li`
@@ -146,4 +151,8 @@ const CardLi = styled.li`
     color: var(--gray0);
     font-size: 12px;
   }
+
+  ${mediaQuery('mobile')(css`
+    min-height: 80px;
+  `)}
 `

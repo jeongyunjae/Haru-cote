@@ -1,10 +1,19 @@
+import { useState } from 'react'
 import styled from 'styled-components'
+import Realistic from 'react-canvas-confetti/dist/presets/realistic'
 import ProblemCard from '../components/ProblemCard/ProblemCard'
 import useThisWeekProblemsQuery from '../hooks/query/problems/useThisWeekProblemsQuery'
 import { skeletonAnimation } from '../assets/styles/animation'
+import { Snackbar } from '../components/Snackbar/Snackbar'
+import useSnackbarStore from '../modules/snackbar/useSnackbarStore'
 
 export default function LandingPage() {
   const { data: thisWeekProblemsList, isLoading } = useThisWeekProblemsQuery()
+  const {
+    snackbarData: { message, isOpen },
+    closeSnackbar,
+  } = useSnackbarStore()
+  const [tester, setTester] = useState(false)
   return (
     <LandingWrapper>
       <CardWrapper>
@@ -30,6 +39,14 @@ export default function LandingPage() {
           </>
         )}
       </CardWrapper>
+      {tester && <Confetti autorun={{ speed: 1, duration: 2 }} />}
+      <Snackbar
+        open={isOpen}
+        innerText={message}
+        buttonLabel='확인'
+        onClose={closeSnackbar}
+        onButtonClick={closeSnackbar}
+      />
     </LandingWrapper>
   )
 }
@@ -40,6 +57,12 @@ const LandingWrapper = styled.main`
   flex-direction: column;
   align-items: center;
   position: relative;
+`
+
+const Confetti = styled(Realistic)`
+  width: 100%;
+  height: 100%;
+  position: absolute;
 `
 
 const CardWrapper = styled.ul`

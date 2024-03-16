@@ -1,14 +1,15 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import { useQueryClient } from 'react-query'
 
 import StartPickStep from '../components/StartPickStep'
 import ShowPickStep from '../components/ShowPickStep'
 import { useFunnel } from '../components/Funnel/useFunnel'
 import Button from '../components/Button/Button'
 import usePickStore from '../modules/pickStore/usePickStore'
-import { useQueryClient } from 'react-query'
 import { ProblemResType } from '../lib/api/problems/getCandidateProblems'
 import usePostThisWeekProblems from '../hooks/query/problems/usePostThisWeekProblems'
 import { PostThisWeekProblemsReq } from '../lib/api/problems/postThisWeekProblems'
+import { mediaQuery } from '../assets/styles/mediaQuery'
 
 export type levelType = { value: number; isContentOpen: boolean }
 
@@ -16,6 +17,7 @@ export default function PickPage() {
   const { Funnel, Step, currentStep, handleStep } = useFunnel('문제 선정하기')
   const { levelData } = usePickStore()
   const queryClient = useQueryClient()
+
   const { mutateAsync: mutatePostThisWeekProblems, isLoading } =
     usePostThisWeekProblems()
   const sumOfLevels = Object.values(levelData).reduce(
@@ -97,6 +99,10 @@ const PageWrapper = styled.main`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  ${mediaQuery('mobile')(css`
+    height: calc(100vh - 82px);
+  `)}
 `
 
 const PickWrapper = styled.section`
@@ -107,6 +113,12 @@ const PickWrapper = styled.section`
   box-sizing: border-box;
   background-color: var(--gray100);
   border-radius: 20px;
+
+  ${mediaQuery('mobile')(css`
+    width: 100%;
+    border-radius: 0px;
+    height: 100%;
+  `)}
 `
 
 const TitleWrapper = styled.div`
