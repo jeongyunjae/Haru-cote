@@ -13,31 +13,34 @@ export default function StartPickStep() {
 
   return (
     <StartPickStepWrapper>
-      <Dropdown<number, number>
+      <Dropdown
         label='상 문제 수'
         options={items}
         value={level1Value}
-        onValueChange={(myData: number) =>
-          updateLevelData('level1Value', myData)
+        onValueChange={(value: number | string) =>
+          updateLevelData('level1Value', Number(value))
         }
+        valueLabel='문제'
       />
       <Divider />
-      <Dropdown<number, number>
+      <Dropdown
         label='중상 문제 수'
         options={items}
         value={level2Value}
-        onValueChange={(myData: number) =>
-          updateLevelData('level2Value', myData)
+        onValueChange={(value: number | string) =>
+          updateLevelData('level2Value', Number(value))
         }
+        valueLabel='문제'
       />
       <Divider />
-      <Dropdown<number, number>
+      <Dropdown
         label='중 문제 수'
         options={items}
         value={level3Value}
-        onValueChange={(myData: number) =>
-          updateLevelData('level3Value', myData)
+        onValueChange={(value: number | string) =>
+          updateLevelData('level3Value', Number(value))
         }
+        valueLabel='문제'
       />
     </StartPickStepWrapper>
   )
