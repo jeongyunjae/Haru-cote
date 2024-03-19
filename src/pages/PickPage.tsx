@@ -94,7 +94,7 @@ export default function PickPage() {
 
 const PageWrapper = styled.main`
   width: 100%;
-  height: calc(100vh - 50px - 82px);
+  height: calc(100vh - 82px);
   position: relative;
   display: flex;
   justify-content: center;
@@ -107,7 +107,7 @@ const PageWrapper = styled.main`
 
 const PickWrapper = styled.section`
   width: 332px;
-  height: calc(100% - 80px);
+  height: calc(100% - 40px);
   position: relative;
   padding: 24px 20px;
   box-sizing: border-box;
