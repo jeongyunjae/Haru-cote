@@ -31,7 +31,7 @@ const HeaderWrapper = styled.header`
   width: 100%;
   position: sticky;
   top: 0;
-  z-index: 99999;
+  z-index: 9999;
   background-color: var(--gray0);
 `
 

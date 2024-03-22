@@ -3,7 +3,7 @@ import { useQueryClient } from 'react-query'
 
 import StartPickStep from '../components/StartPickStep'
 import ShowPickStep from '../components/ShowPickStep'
-import { useFunnel } from '../components/Funnel/useFunnel'
+import { useFunnel } from '../hooks/useFunnel'
 import Button from '../components/Button/Button'
 import usePickStore from '../modules/pickStore/usePickStore'
 import { ProblemResType } from '../lib/api/problems/getCandidateProblems'

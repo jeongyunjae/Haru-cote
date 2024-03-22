@@ -74,6 +74,7 @@ const DropdownSelect = styled.select`
   align-items: center;
   font-size: 16px;
   font-weight: var(--medium);
+  color: var(--gray800);
 
   border: 1px solid var(--gray400);
   border-radius: 12px;

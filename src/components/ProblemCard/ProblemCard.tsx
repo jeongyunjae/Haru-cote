@@ -73,7 +73,7 @@ const Card = styled.div`
   border-radius: 24px;
   background-size: cover;
   background-color: var(--gray700);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 15px rgba(36, 37, 38, 0.08);
   position: relative;
   cursor: pointer;
 
