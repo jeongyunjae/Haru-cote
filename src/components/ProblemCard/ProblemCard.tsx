@@ -1,20 +1,20 @@
 import styled from 'styled-components'
 import classNames from 'classnames'
 import { useCard } from './hooks/useCard'
-import { ProblemPersonType } from '../../data/types'
+import { ProblemMemberNameType } from '../../data/types'
 
 export type ProblemCardProps = {
   problemId: number
   level?: number
   title?: string
-  person: ProblemPersonType
+  memberName?: ProblemMemberNameType
 }
 
 export default function ProblemCard({
   problemId,
   level = 0,
   title = '',
-  person,
+  memberName = '',
 }: ProblemCardProps) {
   const { containerRef, overlayRef } = useCard()
 
@@ -29,7 +29,7 @@ export default function ProblemCard({
       <Card className={classNames([`level${level}`])}>
         <span className='title'>{title}</span>
         <span className='level'>{`level ${level}`}</span>
-        <span className='person'>{person}</span>
+        <span className='member'>{memberName}</span>
       </Card>
     </ContainerWrapper>
   )
@@ -73,7 +73,7 @@ const Card = styled.div`
   border-radius: 24px;
   background-size: cover;
   background-color: var(--gray700);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 15px rgba(36, 37, 38, 0.08);
   position: relative;
   cursor: pointer;
 
@@ -98,7 +98,7 @@ const Card = styled.div`
     font-weight: var(--regular);
   }
 
-  & > .person {
+  & > .member {
     bottom: 16px;
     right: 16px;
     font-size: var(--c1);

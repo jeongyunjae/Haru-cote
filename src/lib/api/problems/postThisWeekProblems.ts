@@ -1,7 +1,7 @@
 import client from '../../client'
 
 export type PostThisWeekProblemsReq = {
-  problemId: number
+  problem_id: number
   title: string
 }
 

@@ -8,7 +8,12 @@ export type ButtonSizeType = 'large_block' | 'large' | 'medium' | 'small'
 export type ButtonProps = {
   label: string
   size: ButtonSizeType
-  theme: 'fill_normal' | 'fill_danger' | 'soft_normal' | 'soft_mono'
+  theme:
+    | 'fill_normal'
+    | 'fill_gradient'
+    | 'fill_danger'
+    | 'soft_normal'
+    | 'soft_mono'
   disabled?: boolean
   loading?: boolean
   width?: string
@@ -82,6 +87,15 @@ const ButtonWrapper = styled.button`
     }
   }
 
+  &.fill_gradient {
+    transition: filter 0.2s ease-in-out;
+    background-image: linear-gradient(to right, #434343 0%, black 100%);
+    color: var(--gray0);
+    &.active {
+      filter: brightness(0.7);
+    }
+  }
+
   &.fill_danger {
     background-color: var(--red400);
     color: var(--gray0);
@@ -92,17 +106,20 @@ const ButtonWrapper = styled.button`
   }
 
   &.soft_normal {
-    background-color: var(--blue100);
-    color: var(--yellow700);
+    border: 1px solid var(--gray500);
+    background-color: var(--gray0);
+    color: var(--gray800);
 
     &.active {
-      background-color: var(--blue200);
+      border: 1px solid var(--blue400);
+      background-color: var(--blue100);
+      color: var(--blue400);
     }
   }
 
   &.soft_mono {
     background-color: var(--gray200);
-    color: var(--gray800);
+    color: var(--gray700);
 
     &.active {
       background-color: var(--gray300);
@@ -116,7 +133,7 @@ const ButtonWrapper = styled.button`
     padding: 0 32px;
     font-size: var(--p1);
     line-height: var(--p1LineHeight);
-    border-radius: 16px;
+    border-radius: 12px;
   }
 
   &.large_block {
@@ -134,10 +151,14 @@ const ButtonWrapper = styled.button`
 
   &.small {
     height: 32px;
-    padding: 0 16px;
-    font-size: var(--c1);
-    line-height: var(--c1LineHeight);
-    border-radius: 12px;
+    padding: 0 12px;
+
+    font-size: var(--c2);
+    line-height: var(--c2LineHeight);
+
+    & > svg {
+      width: 14px;
+    }
   }
 
   // 너비 설정

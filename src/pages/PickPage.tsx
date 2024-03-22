@@ -3,7 +3,7 @@ import { useQueryClient } from 'react-query'
 
 import StartPickStep from '../components/StartPickStep'
 import ShowPickStep from '../components/ShowPickStep'
-import { useFunnel } from '../components/Funnel/useFunnel'
+import { useFunnel } from '../hooks/useFunnel'
 import Button from '../components/Button/Button'
 import usePickStore from '../modules/pickStore/usePickStore'
 import { ProblemResType } from '../lib/api/problems/getCandidateProblems'
@@ -33,7 +33,7 @@ export default function PickPage() {
     // cachedData 배열을 해시맵으로 변환
     const mapA: PostThisWeekProblemsReq[] = cachedData.map(
       ({ problemId, titleKo }) => {
-        return { problemId: problemId, title: titleKo }
+        return { problem_id: problemId, title: titleKo }
       }
     )
 

@@ -1,4 +1,4 @@
-import { ProblemPersonType } from '../../../data/types'
+import { ProblemMemberNameType } from '../../../data/types'
 import client from '../../client'
 
 export async function getThisWeekProblems() {
@@ -9,10 +9,11 @@ export async function getThisWeekProblems() {
 }
 
 export type ProblemResDataType = {
-  problemId: number
+  problem_id: number
   title: string
   level: number
-  person: ProblemPersonType
-  isSolved: boolean
-  isThisWeek: boolean
+  is_solved: boolean
+  is_thisWeek: boolean
+  member_id?: number
+  member_name?: ProblemMemberNameType
 }
