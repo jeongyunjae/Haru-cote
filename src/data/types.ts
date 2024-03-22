@@ -1,7 +1,7 @@
 /**
     @description 하루코테 멤버
    */
-export type ProblemPersonType =
+export type ProblemMemberNameType =
   | '윤재'
   | '가윤'
   | '진욱'

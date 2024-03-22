@@ -33,7 +33,7 @@ export default function PickPage() {
     // cachedData 배열을 해시맵으로 변환
     const mapA: PostThisWeekProblemsReq[] = cachedData.map(
       ({ problemId, titleKo }) => {
-        return { problemId: problemId, title: titleKo }
+        return { problem_id: problemId, title: titleKo }
       }
     )
 

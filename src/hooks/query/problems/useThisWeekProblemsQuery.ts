@@ -5,5 +5,5 @@ import { getThisWeekProblems } from '../../../lib/api/problems/getThisWeekProble
 export default function useThisWeekProblemsQuery(
   options: QueryOptionsOf<typeof getThisWeekProblems> = {}
 ) {
-  return useQuery(['problem_list'], () => getThisWeekProblems(), options)
+  return useQuery(['problemList'], () => getThisWeekProblems(), options)
 }

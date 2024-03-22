@@ -28,25 +28,27 @@ export type ModalSecondaryPropsType = Omit<
 }
 
 export type ModalProps = {
-  open: boolean
   Title: React.ReactNode
   Description?: React.ReactNode
+  open: boolean
+  onClose: () => void
   primaryProps: ModalPrimaryPropsType
   secondaryProps?: ModalSecondaryPropsType
-  onClose: () => void
+  children?: React.ReactNode
 } & React.HTMLAttributes<HTMLDivElement>
 
 // 버튼의 너비가 절반일 때 가능한 최대 레이블의 길이 (레이블의 길이는 띄어쓰기 제외 글자 길이로만 판단)
 const MAX_HALF_LABEL_LENGTH = 4
 
 export function Modal({
-  open,
   Title,
   Description,
+  open,
+  onClose,
   primaryProps,
   secondaryProps,
-  onClose,
   className,
+  children,
   ...props
 }: ModalProps) {
   const isFullWidth =
@@ -88,6 +90,7 @@ export function Modal({
         >
           <header>{Title}</header>
           {Description && <div className='description'>{Description}</div>}
+          {children}
           <footer>
             {isFullWidth ? (
               <>
@@ -108,7 +111,7 @@ export function Modal({
 }
 
 const ModalWrapper = styled.div`
-  width: 440px;
+  width: 412px;
   border-radius: 16px;
   background-color: var(--gray0);
   overflow: hidden;
