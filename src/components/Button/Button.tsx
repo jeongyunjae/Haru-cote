@@ -106,11 +106,14 @@ const ButtonWrapper = styled.button`
   }
 
   &.soft_normal {
-    background-color: var(--blue100);
-    color: var(--yellow700);
+    border: 1px solid var(--gray500);
+    background-color: var(--gray0);
+    color: var(--gray800);
 
     &.active {
-      background-color: var(--blue200);
+      border: 1px solid var(--blue400);
+      background-color: var(--blue100);
+      color: var(--blue400);
     }
   }
 
@@ -148,10 +151,14 @@ const ButtonWrapper = styled.button`
 
   &.small {
     height: 32px;
-    padding: 0 16px;
-    font-size: var(--c1);
-    line-height: var(--c1LineHeight);
-    border-radius: 12px;
+    padding: 0 12px;
+
+    font-size: var(--c2);
+    line-height: var(--c2LineHeight);
+
+    & > svg {
+      width: 14px;
+    }
   }
 
   // 너비 설정
