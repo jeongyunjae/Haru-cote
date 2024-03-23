@@ -66,7 +66,7 @@ export default function LandingPage() {
 
   return (
     <LandingWrapper>
-      {isConfetti && <Confetti autorun={{ speed: 10, duration: 1 }} />}
+      {isConfetti && <Confetti autorun={{ speed: 50, duration: 10 }} />}
 
       <CardWrapper>
         {isThisWeekProblemsLoading || isRefetching ? (
