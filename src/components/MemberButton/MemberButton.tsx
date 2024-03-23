@@ -1,7 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import Icon from '../Icon/icon'
 import classNames from 'classnames'
+import { mediaQuery } from '../../assets/styles/mediaQuery'
 
 export type MemberButtonProps = {
   memberId: number
@@ -45,12 +46,14 @@ const MemberButtonWrapper = styled.button`
   height: 32px;
 
   font-size: var(--c2);
-  font-weight: var(--medium);
   line-height: var(--c2LineHeight);
+  font-weight: var(--medium);
+  color: var(--gray800);
 
   border: 1px solid var(--gray600);
   border-radius: 16px;
   background-color: var(--gray0);
+
   cursor: pointer;
 
   & > input {
@@ -75,4 +78,8 @@ const MemberButtonWrapper = styled.button`
       margin-right: 6px;
     }
   }
+
+  ${mediaQuery('mobile')(css`
+    height: 36px;
+  `)}
 `
