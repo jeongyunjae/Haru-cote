@@ -1,5 +1,6 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import Icon from './Icon/icon'
+import { mediaQuery } from '../assets/styles/mediaQuery'
 
 export default function Footer() {
   return (
@@ -16,10 +17,10 @@ const FooterWrapper = styled.footer`
   border-top: 1px solid var(--gray800);
   box-sizing: border-box;
   position: relative;
-  z-index: 99999;
+  z-index: 9999;
 
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
 
   & > svg {
@@ -28,7 +29,17 @@ const FooterWrapper = styled.footer`
 
   & > div {
     font-size: 14px;
-    position: absolute;
-    right: 24px;
   }
+
+  ${mediaQuery('mobile')(css`
+    padding: 0px 16px;
+
+    & > svg {
+      width: 60px;
+    }
+
+    & > div {
+      font-size: 12px;
+    }
+  `)}
 `

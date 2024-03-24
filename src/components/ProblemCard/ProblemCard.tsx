@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import classNames from 'classnames'
-import { useCard } from './hooks/useCard'
 import { ProblemMemberNameType } from '../../data/types'
 
 export type ProblemCardProps = {
@@ -16,61 +15,27 @@ export default function ProblemCard({
   title = '',
   memberName = '',
 }: ProblemCardProps) {
-  const { containerRef, overlayRef } = useCard()
-
   return (
-    <ContainerWrapper
-      ref={containerRef}
+    <Card
+      className={classNames([`level${level}`])}
       onClick={() =>
         window.open(`https://www.acmicpc.net/problem/${problemId}`, '_blank')
       }
     >
-      <Overlay ref={overlayRef} />
-      <Card className={classNames([`level${level}`])}>
-        <span className='title'>{title}</span>
-        <span className='level'>{`level ${level}`}</span>
-        <span className='member'>{memberName}</span>
-      </Card>
-    </ContainerWrapper>
+      <span className='title'>{title}</span>
+      <span className='level'>{`level ${level}`}</span>
+      <span className='member'>{memberName}</span>
+    </Card>
   )
 }
 
-const ContainerWrapper = styled.div`
-  width: 206px;
-  height: 300px;
-  position: relative;
-  display: flex;
-  transition: all 0.1s;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-`
-
-const Overlay = styled.div`
-  position: absolute;
-  width: 180px;
-  height: 240px;
-  border-radius: 24px;
-  background-image: radial-gradient(
-    farthest-corner circle at 50% 50%,
-    hsla(0, 0%, 40%, 0.8) 10%,
-    hsla(0, 0%, 40%, 0.65) 20%,
-    hsla(0, 0%, 0%, 0.5) 90%
-  );
-  filter: brightness(1.1) opacity(0);
-  mix-blend-mode: color-dodge;
-  background-size: 150% 150%;
-  background-position: 100%;
-  transition: all 0.1s;
-  cursor: pointer;
-`
-
 const Card = styled.div`
-  width: 180px;
-  height: 240px;
-  padding: 16px;
+  display: block;
+  width: 100%;
+  height: 320px;
+  padding: 20px;
   box-sizing: border-box;
-  border-radius: 24px;
+  border-radius: 18px;
   background-size: cover;
   background-color: var(--gray700);
   box-shadow: 0 6px 15px rgba(36, 37, 38, 0.08);
@@ -83,24 +48,24 @@ const Card = styled.div`
   }
 
   & > .title {
-    width: calc(100% - 32px);
-    top: 13px;
-    font-size: 18px;
-    line-height: 24px;
+    width: calc(100% - 40px);
+    top: 20px;
+    font-size: 24px;
+    line-height: 28px;
     font-weight: var(--bold);
     word-break: keep-all;
   }
 
   & > .level {
-    bottom: 16px;
-    left: 16px;
-    font-size: var(--c2);
+    bottom: 20px;
+    right: 20px;
+    font-size: var(--c1);
     font-weight: var(--regular);
   }
 
   & > .member {
-    bottom: 16px;
-    right: 16px;
+    bottom: 20px;
+    left: 20px;
     font-size: var(--c1);
     font-weight: var(--regular);
   }
