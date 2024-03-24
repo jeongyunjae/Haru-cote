@@ -14,6 +14,13 @@ import MemberButton from '../components/MemberButton/MemberButton'
 import { MemberResType } from '../lib/api/members/getMembers'
 import { mediaQuery } from '../assets/styles/mediaQuery'
 
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/effect-cards'
+import 'swiper/css/effect-coverflow'
+import 'swiper/css/pagination'
+import { EffectCards, EffectCoverflow, Pagination } from 'swiper/modules'
+
 export default function LandingPage() {
   const {
     data: thisWeekProblemsList,
@@ -71,26 +78,65 @@ export default function LandingPage() {
       <CardWrapper>
         {isThisWeekProblemsLoading || isRefetching ? (
           <>
-            {Array.from({ length: 5 }).map((_, _i) => (
+            {Array.from({ length: 3 }).map((_, _i) => (
               <CardSkeleton key={_i} />
             ))}
           </>
         ) : (
-          <>
+          <Swiper
+            effect='coverflow'
+            grabCursor
+            centeredSlides
+            loop
+            navigation
+            pagination
+            slidesPerView={3}
+            coverflowEffect={{
+              rotate: 50,
+              stretch: 0,
+              depth: 50,
+              modifier: 1,
+              slideShadows: false,
+            }}
+            modules={[EffectCoverflow, Pagination]}
+          >
             {thisWeekProblemsList?.map(
               ({ problem_id, level, title, member_name }, _i) => (
-                <ProblemCard
-                  key={problem_id}
-                  problemId={problem_id}
-                  level={level}
-                  title={title}
-                  memberName={member_name}
-                />
+                <SwiperSlide key={problem_id}>
+                  <ProblemCard
+                    problemId={problem_id}
+                    level={level}
+                    title={title}
+                    memberName={member_name}
+                  />
+                </SwiperSlide>
               )
             )}
-          </>
+          </Swiper>
         )}
       </CardWrapper>
+      <MobileCardWrapper>
+        {isThisWeekProblemsLoading || isRefetching ? (
+          <MobileCardSkeleton />
+        ) : (
+          <Swiper effect='cards' grabCursor loop modules={[EffectCards]}>
+            <>
+              {thisWeekProblemsList?.map(
+                ({ problem_id, level, title, member_name }, _i) => (
+                  <SwiperSlide key={problem_id}>
+                    <ProblemCard
+                      problemId={problem_id}
+                      level={level}
+                      title={title}
+                      memberName={member_name}
+                    />
+                  </SwiperSlide>
+                )
+              )}
+            </>
+          </Swiper>
+        )}
+      </MobileCardWrapper>
       <Button
         label='멤버 배정하기'
         size='large_block'
@@ -152,26 +198,68 @@ const Confetti = styled(Realistic)`
   position: absolute;
 `
 
-const CardWrapper = styled.ul`
-  margin-top: 50px;
+const CardWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  max-width: 1080px;
-  height: 300px;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  gap: 12px;
 
-  scrollbar-width: none; /* Firefox에 대한 스크롤바 숨김 */
-  -ms-overflow-style: none; /* IE 및 Edge에 대한 스크롤바 숨김 */
-  &::-webkit-scrollbar {
-    display: none; /* Chrome 및 Safari에 대한 스크롤바 숨김 */
+  .swiper {
+    width: 760px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 240px;
+    height: 320px;
+  }
+
+  ${mediaQuery('mobile')(css`
+    display: none;
+  `)}
+`
+
+const CardSkeleton = styled.div`
+  margin: 50px 13px;
+  width: 240px;
+  height: 320px;
+  box-sizing: border-box;
+  background-size: cover;
+  background-color: var(--gray300);
+  border-radius: 24px;
+  animation: ${skeletonAnimation} 1s ease-in-out infinite;
+`
+
+const MobileCardWrapper = styled.div`
+  display: none;
+
+  ${mediaQuery('mobile')(css`
+    display: block;
+  `)}
+
+  .swiper {
+    width: 240px;
+    height: 320px;
+    overflow: visible;
+    margin-top: 50px;
+  }
+
+  .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
   }
 `
-const CardSkeleton = styled.li`
-  margin: 30px 13px;
-  width: 180px;
-  height: 240px;
+
+const MobileCardSkeleton = styled.div`
+  width: 240px;
+  height: 320px;
+  margin: 50px 13px;
   padding: 16px;
   box-sizing: border-box;
   background-size: cover;
