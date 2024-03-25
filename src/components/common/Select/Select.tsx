@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Icon from '../Icon/icon'
 
-export type DropdownProps = {
+export type SelectProps = {
   label: string
   options: (string | number)[]
   value: number | string
@@ -10,20 +10,20 @@ export type DropdownProps = {
   onValueChange: (data: string) => void
 } & React.HTMLAttributes<HTMLDivElement>
 
-export default function Dropdown({
+export default function Select({
   label,
   options,
   value,
   valueLabel = '',
   onValueChange,
-}: DropdownProps) {
+}: SelectProps) {
   return (
-    <DropdownWrapper>
+    <>
       <label>{label}</label>
       <SelectWrapper>
         <Icon name='LineArrowDown' />
 
-        <DropdownSelect
+        <OptionsWrapper
           value={value}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
             onValueChange(e.target.value)
@@ -36,16 +36,11 @@ export default function Dropdown({
               </option>
             )
           })}
-        </DropdownSelect>
+        </OptionsWrapper>
       </SelectWrapper>
-    </DropdownWrapper>
+    </>
   )
 }
-
-const DropdownWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`
 
 const SelectWrapper = styled.div`
   position: relative;
@@ -61,7 +56,7 @@ const SelectWrapper = styled.div`
   }
 `
 
-const DropdownSelect = styled.select`
+const OptionsWrapper = styled.select`
   position: relative;
 
   width: 100%;

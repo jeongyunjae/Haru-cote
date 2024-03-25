@@ -1,6 +1,8 @@
-import styled from 'styled-components'
-import Icon from './Icon/icon'
+import styled, { css } from 'styled-components'
+import Icon from './common/Icon/icon'
 import { Link } from 'react-router-dom'
+import { mediaQuery } from '../assets/styles/mediaQuery'
+import HeaderAccordion from './HeaderAccordion/HeaderAccordion'
 
 export default function Header() {
   return (
@@ -9,6 +11,21 @@ export default function Header() {
         <Link to='/'>
           <Icon name='Logo' />
         </Link>
+        <RightToggleButtonWrapper>
+          <HeaderAccordion>
+            <MobileNavUl>
+              <MobileNavLi>
+                <Link to='/pick'>Pick</Link>
+              </MobileNavLi>
+              <MobileNavLi>
+                <Link to='/history'>History</Link>
+              </MobileNavLi>
+              <MobileNavLi>
+                <Link to='/settings'>Settings</Link>
+              </MobileNavLi>
+            </MobileNavUl>
+          </HeaderAccordion>
+        </RightToggleButtonWrapper>
       </MainHeader>
       <NavHeader>
         <NavUl>
@@ -16,7 +33,7 @@ export default function Header() {
             <Link to='/pick'>Pick</Link>
           </NavLi>
           <NavLi>
-            <Link to='/watch'>Watch</Link>
+            <Link to='/history'>History</Link>
           </NavLi>
           <NavLi>
             <Link to='/settings'>Settings</Link>
@@ -33,29 +50,96 @@ const HeaderWrapper = styled.header`
   top: 0;
   z-index: 9999;
   background-color: var(--gray0);
+
+  ${mediaQuery('mobile')(css`
+    background-color: hsla(0, 0%, 100%, 0.9);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 1px 1px 0 rgba(81, 99, 120, 0.2);
+  `)}
 `
 
 const MainHeader = styled.div`
   width: 100%;
-  height: 50px;
+  height: var(--heightMainHeader);
   display: flex;
   justify-content: center;
   align-items: center;
 
   & > a {
-    display: flex;
     height: 20px;
+  }
+
+  ${mediaQuery('mobile')(css`
+    height: var(--heightMainMobileHeader);
+    max-width: calc(100% - var(--paddingContainerBase));
+    margin: 0 auto;
+    justify-content: space-between;
+
+    & > a > svg {
+      width: 100px;
+    }
+  `)}
+`
+
+const RightToggleButtonWrapper = styled.div`
+  display: none;
+
+  position: absolute;
+  right: 20px;
+  align-items: center;
+
+  & > svg {
+    padding: 0px 8px;
+    margin-right: -8px;
+  }
+  & > svg > path {
+    stroke: var(--gray800);
+  }
+
+  ${mediaQuery('mobile')(css`
+    display: block;
+  `)}
+`
+
+const MobileNavUl = styled.ul`
+  background-color: hsla(0, 0%, 100%, 0.9);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 1px 0 rgba(81, 99, 120, 0.2);
+
+  display: flex;
+  flex-direction: column;
+`
+const MobileNavLi = styled.li`
+  width: 100vw;
+  height: 56px;
+  box-sizing: border-box;
+
+  & > a {
+    padding: 18px 20px;
+    display: block;
+    font-size: var(--p1);
+    color: var(--gray800);
+    font-weight: var(--medium);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: none;
   }
 `
 
 const NavHeader = styled.nav`
   width: 100%;
-  height: 32px;
+  height: var(--heightNavHeader);
   border-top: 1px solid var(--gray800);
   border-bottom: 1px solid var(--gray800);
   box-sizing: border-box;
   display: flex;
   justify-content: center;
+
+  ${mediaQuery('mobile')(css`
+    display: none;
+  `)}
 `
 
 const NavUl = styled.ul`
@@ -73,7 +157,7 @@ const NavLi = styled.li`
     margin: 0 auto;
     width: fit-content;
     display: block;
-    font-size: 16px;
+    font-size: var(--p1);
     color: var(--gray800);
     text-decoration: none;
   }

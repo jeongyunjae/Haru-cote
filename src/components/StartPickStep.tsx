@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import Dropdown from './Dropdown/Dropdown'
-import Divider from './Divider/Divider'
+import Divider from './common/Divider/Divider'
 import usePickStore from '../modules/pickStore/usePickStore'
+import Select from './common/Select/Select'
 
 const items: number[] = [0, 1, 2, 3, 4, 5]
 
@@ -13,7 +13,7 @@ export default function StartPickStep() {
 
   return (
     <StartPickStepWrapper>
-      <Dropdown
+      <Select
         label='상 문제 수'
         options={items}
         value={level1Value}
@@ -23,7 +23,7 @@ export default function StartPickStep() {
         valueLabel='문제'
       />
       <Divider />
-      <Dropdown
+      <Select
         label='중상 문제 수'
         options={items}
         value={level2Value}
@@ -33,7 +33,7 @@ export default function StartPickStep() {
         valueLabel='문제'
       />
       <Divider />
-      <Dropdown
+      <Select
         label='중 문제 수'
         options={items}
         value={level3Value}

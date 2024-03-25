@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import styled, { css } from 'styled-components'
 import classNames from 'classnames'
 import { Portal } from '../Portal/Portal'
-import { mediaQuery } from '../../assets/styles/mediaQuery'
-import { float } from '../../assets/styles/animation'
+import { mediaQuery } from '../../../assets/styles/mediaQuery'
+import { float } from '../../../assets/styles/animation'
 
 export type SnackbarProps = {
   open: boolean

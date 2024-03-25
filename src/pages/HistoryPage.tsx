@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components'
 import { mediaQuery } from '../assets/styles/mediaQuery'
 
-export default function SettingsPage() {
-  return <SettingsWrapper></SettingsWrapper>
+export default function HistoryPage() {
+  return <HistoryWrapper></HistoryWrapper>
 }
 
-const SettingsWrapper = styled.main`
+const HistoryWrapper = styled.main`
   width: 100%;
   height: calc(
     100vh - var(--heightMainHeader) - var(--heightNavHeader) -

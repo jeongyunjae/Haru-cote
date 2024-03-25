@@ -89,7 +89,7 @@ const ButtonWrapper = styled.button`
 
   &.fill_gradient {
     transition: filter 0.2s ease-in-out;
-    background-image: linear-gradient(to right, #434343 0%, black 100%);
+    background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
     color: var(--gray0);
     &.active {
       filter: brightness(0.7);
@@ -152,7 +152,7 @@ const ButtonWrapper = styled.button`
   &.small {
     height: 32px;
     padding: 0 12px;
-
+    border-radius: 12px;
     font-size: var(--c2);
     line-height: var(--c2LineHeight);
 

@@ -4,7 +4,7 @@ import { useQueryClient } from 'react-query'
 import StartPickStep from '../components/StartPickStep'
 import ShowPickStep from '../components/ShowPickStep'
 import { useFunnel } from '../hooks/useFunnel'
-import Button from '../components/Button/Button'
+import Button from '../components/common/Button/Button'
 import usePickStore from '../modules/pickStore/usePickStore'
 import { ProblemResType } from '../lib/api/problems/getCandidateProblems'
 import usePostThisWeekProblems from '../hooks/query/problems/usePostThisWeekProblems'
@@ -94,14 +94,14 @@ export default function PickPage() {
 
 const PageWrapper = styled.main`
   width: 100%;
-  height: calc(100vh - 82px);
+  height: calc(100vh - var(--heightMainHeader) - var(--heightNavHeader));
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
 
   ${mediaQuery('mobile')(css`
-    height: calc(100vh - 82px);
+    height: calc(100vh - var(--heightMainMobileHeader));
   `)}
 `
 

@@ -4,7 +4,7 @@ import { Portal } from '../Portal/Portal'
 import { Dimmer } from '../Dimmer/Dimmer'
 import Button, { ButtonProps } from '../Button/Button'
 import styled, { css } from 'styled-components'
-import { mediaQuery } from '../../assets/styles/mediaQuery'
+import { mediaQuery } from '../../../assets/styles/mediaQuery'
 
 export type ModalPrimaryPropsType = Omit<
   ButtonProps,
@@ -32,7 +32,7 @@ export type ModalProps = {
   Description?: React.ReactNode
   open: boolean
   onClose: () => void
-  primaryProps: ModalPrimaryPropsType
+  primaryProps?: ModalPrimaryPropsType
   secondaryProps?: ModalSecondaryPropsType
   children?: React.ReactNode
 } & React.HTMLAttributes<HTMLDivElement>
@@ -53,13 +53,14 @@ export function Modal({
 }: ModalProps) {
   const isFullWidth =
     !secondaryProps ||
-    primaryProps.label.replace(/ /gi, '').length > MAX_HALF_LABEL_LENGTH ||
+    (primaryProps &&
+      primaryProps.label.replace(/ /gi, '').length > MAX_HALF_LABEL_LENGTH) ||
     (secondaryProps &&
       secondaryProps.label.replace(/ /gi, '').length > MAX_HALF_LABEL_LENGTH)
 
   const classNameProps = classNames(isFullWidth && ['vertical'], className)
 
-  const PrimaryButton = (
+  const PrimaryButton = primaryProps ? (
     <Button
       id='modal__primary-button'
       fullWidth={isFullWidth}
@@ -67,7 +68,7 @@ export function Modal({
       size='large'
       {...primaryProps}
     />
-  )
+  ) : null
 
   const SecondaryButton = secondaryProps ? (
     <Button

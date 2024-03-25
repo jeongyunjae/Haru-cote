@@ -1,7 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import styled from 'styled-components'
-import { fadeIn, fadeOut } from '../../assets/styles/animation'
+import { fadeIn, fadeOut } from '../../../assets/styles/animation'
 
 export type DimmerProps = {
   children: React.ReactNode
