@@ -3,11 +3,11 @@ import Realistic from 'react-canvas-confetti/dist/presets/realistic'
 import ProblemCard from '../components/ProblemCard/ProblemCard'
 import useThisWeekProblemsQuery from '../hooks/query/problems/useThisWeekProblemsQuery'
 import { skeletonAnimation } from '../assets/styles/animation'
-import { Snackbar } from '../components/Snackbar/Snackbar'
+import { Snackbar } from '../components/common/Snackbar/Snackbar'
 import useSnackbarStore from '../modules/snackbar/useSnackbarStore'
-import { Modal } from '../components/Modal/Modal'
+import { Modal } from '../components/common/Modal/Modal'
 import { useToggleState } from '../hooks/useToggleState'
-import Button from '../components/Button/Button'
+import Button from '../components/common/Button/Button'
 import useMembersQuery from '../hooks/query/members/useMembersQuery'
 import { useEffect, useState } from 'react'
 import MemberButton from '../components/MemberButton/MemberButton'
@@ -45,7 +45,7 @@ export default function LandingPage() {
       setMemberCheckboxes(
         memberList.map((item) => ({
           ...item,
-          isChecked: false,
+          isChecked: true,
         }))
       )
     }
@@ -155,6 +155,7 @@ export default function LandingPage() {
         primaryProps={{
           theme: 'fill_normal',
           label: '배정하기',
+          disabled: !memberCheckboxes.some((data) => data.isChecked),
           onClick: handleAssignMemberSubmit,
         }}
         secondaryProps={{
@@ -185,11 +186,18 @@ export default function LandingPage() {
 
 const LandingWrapper = styled.main`
   width: 100%;
-  height: calc(100vh - 50px - 82px);
+  height: calc(
+    100vh - var(--heightMainHeader) - var(--heightNavHeader) -
+      var(--heightFooter)
+  );
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
+
+  ${mediaQuery('mobile')(css`
+    height: calc(100vh - var(--heightMainMobileHeader));
+  `)}
 `
 
 const Confetti = styled(Realistic)`
@@ -235,14 +243,14 @@ const MobileCardWrapper = styled.div`
   display: none;
 
   ${mediaQuery('mobile')(css`
-    display: block;
+    display: flex;
+    margin-top: 50px;
   `)}
 
   .swiper {
     width: 240px;
     height: 320px;
     overflow: visible;
-    margin-top: 50px;
   }
 
   .swiper-slide {
@@ -251,6 +259,7 @@ const MobileCardWrapper = styled.div`
     justify-content: center;
     border-radius: 18px;
     font-size: 22px;
+    overflow: visible;
     font-weight: bold;
     color: #fff;
   }
