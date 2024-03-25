@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import Icon from '../Icon/icon'
+import Icon from '../common/Icon/icon'
 import classNames from 'classnames'
 import { mediaQuery } from '../../assets/styles/mediaQuery'
 

@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 import { skeletonAnimation } from '../assets/styles/animation'
 import { tierLevel } from '../utils/solvedac'
-import Button from './Button/Button'
+import Button from './common/Button/Button'
 import usePickStore from '../modules/pickStore/usePickStore'
 import { mediaQuery } from '../assets/styles/mediaQuery'
 

@@ -43,7 +43,11 @@
   --c1LineHeight: 24px;
   --c2LineHeight: 21px;
 
-  --bgColor: #f6f3f2;
+  --paddingContainerBase: 48px;
+  --heightMainHeader: 50px;
+  --heightMainMobileHeader: 58px;
+  --heightNavHeader: 32px;
+  --heightFooter: 50px;
 
   --gray0: #ffffff;
   --gray50: #fafafa;

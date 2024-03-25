@@ -1,11 +1,12 @@
 import styled, { css } from 'styled-components'
-import Icon from './Icon/icon'
+import Icon from './common/Icon/icon'
 import { mediaQuery } from '../assets/styles/mediaQuery'
 
 export default function Footer() {
   return (
     <FooterWrapper>
       <Icon name='Logo' />
+
       <div>© 2024 All Rights Reserved.</div>
     </FooterWrapper>
   )

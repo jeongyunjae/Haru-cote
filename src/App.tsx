@@ -18,7 +18,7 @@ function App() {
 
   const LandingPage = lazy(() => import('./pages/LandingPage'))
   const PickPage = lazy(() => import('./pages/PickPage'))
-  const WatchPage = lazy(() => import('./pages/WatchPage'))
+  const HistoryPage = lazy(() => import('./pages/HistoryPage'))
   const SettingsPage = lazy(() => import('./pages/SettingsPage'))
   const NoMatchPage = lazy(() => import('./pages/NoMatchPage'))
 
@@ -30,7 +30,7 @@ function App() {
             <Route index element={<LandingPage />} />
             <Route path='pick' element={<PickPage />} />
             <Route path='settings' element={<SettingsPage />} />
-            <Route path='watch' element={<WatchPage />} />
+            <Route path='history' element={<HistoryPage />} />
             <Route path='*' element={<NoMatchPage />} />
           </Route>
         </Routes>
