@@ -13,7 +13,6 @@ import { useEffect, useState } from 'react'
 import MemberButton from '../components/MemberButton/MemberButton'
 import { MemberResType } from '../lib/api/members/getMembers'
 import { mediaQuery } from '../assets/styles/mediaQuery'
-
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/effect-cards'
