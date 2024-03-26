@@ -47,7 +47,7 @@ export default function ShowPickStep() {
                 key={problemId}
                 className={classNames([tierLevel[level].tier])}
               >
-                <h2>{titleKo}</h2>
+                <p>{titleKo}</p>
                 <span>{`${tierLevel[level].tier} ${tierLevel[level].level}`}</span>
               </CardLi>
             ))}
@@ -138,10 +138,11 @@ const CardLi = styled.li`
     filter: brightness(0.85);
   }
 
-  & > h2 {
+  & > p {
     color: var(--gray0);
-    font-size: 16px;
-    line-height: 24px;
+    font-weight: var(--bold);
+    font-size: var(--p1);
+    line-height: var(--p1LineHeight);
   }
 
   & > span {
@@ -149,7 +150,7 @@ const CardLi = styled.li`
     right: 10px;
     bottom: 10px;
     color: var(--gray0);
-    font-size: 12px;
+    font-size: var(--c2);
   }
 
   ${mediaQuery('mobile')(css`

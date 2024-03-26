@@ -67,7 +67,7 @@ const OptionsWrapper = styled.select`
 
   display: flex;
   align-items: center;
-  font-size: 16px;
+  font-size: var(--p1);
   font-weight: var(--medium);
   color: var(--gray800);
 

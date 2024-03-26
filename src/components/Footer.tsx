@@ -29,7 +29,7 @@ const FooterWrapper = styled.footer`
   }
 
   & > div {
-    font-size: 14px;
+    font-size: var(--c1);
   }
 
   ${mediaQuery('mobile')(css`
@@ -40,7 +40,7 @@ const FooterWrapper = styled.footer`
     }
 
     & > div {
-      font-size: 12px;
+      font-size: var(--c1);
     }
   `)}
 `
