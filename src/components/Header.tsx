@@ -1,6 +1,6 @@
+import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import Icon from './common/Icon/icon'
-import { Link } from 'react-router-dom'
 import { mediaQuery } from '../assets/styles/mediaQuery'
 import HeaderAccordion from './HeaderAccordion/HeaderAccordion'
 
@@ -92,9 +92,6 @@ const RightToggleButtonWrapper = styled.div`
     padding: 0px 8px;
     margin-right: -8px;
   }
-  & > svg > path {
-    stroke: var(--gray800);
-  }
 
   ${mediaQuery('mobile')(css`
     display: block;
@@ -125,6 +122,10 @@ const MobileNavLi = styled.li`
 
   a:hover {
     text-decoration: none;
+  }
+
+  &:active {
+    background-color: var(--gray200);
   }
 `
 

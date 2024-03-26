@@ -59,7 +59,7 @@ export default function PickPage() {
           {currentStep === '문제 선정하기' ? (
             <Button
               label={`총 ${sumOfLevels}문제 선정하기`}
-              size='medium'
+              size='large'
               fullWidth
               onClick={() => {
                 handleStep('확정하기')
@@ -72,14 +72,14 @@ export default function PickPage() {
             <>
               <Button
                 label='뒤로가기'
-                size='medium'
+                size='large'
                 theme='soft_mono'
                 onClick={() => handleStep('문제 선정하기')}
                 halfWidth
               />
               <Button
                 label='확정하기'
-                size='medium'
+                size='large'
                 theme='fill_normal'
                 onClick={handleThisWeekDataChange}
                 halfWidth

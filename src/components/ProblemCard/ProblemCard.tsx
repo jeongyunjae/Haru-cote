@@ -50,8 +50,7 @@ const Card = styled.div`
   & > .title {
     width: calc(100% - 40px);
     top: 20px;
-    font-size: 24px;
-    line-height: 28px;
+    font-size: var(--h2);
     font-weight: var(--bold);
     word-break: keep-all;
   }

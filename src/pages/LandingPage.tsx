@@ -1,5 +1,8 @@
+import { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 import Realistic from 'react-canvas-confetti/dist/presets/realistic'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { EffectCards, EffectCoverflow, Pagination } from 'swiper/modules'
 import ProblemCard from '../components/ProblemCard/ProblemCard'
 import useThisWeekProblemsQuery from '../hooks/query/problems/useThisWeekProblemsQuery'
 import { skeletonAnimation } from '../assets/styles/animation'
@@ -9,16 +12,13 @@ import { Modal } from '../components/common/Modal/Modal'
 import { useToggleState } from '../hooks/useToggleState'
 import Button from '../components/common/Button/Button'
 import useMembersQuery from '../hooks/query/members/useMembersQuery'
-import { useEffect, useState } from 'react'
 import MemberButton from '../components/MemberButton/MemberButton'
 import { MemberResType } from '../lib/api/members/getMembers'
 import { mediaQuery } from '../assets/styles/mediaQuery'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
 import 'swiper/css/effect-cards'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
-import { EffectCards, EffectCoverflow, Pagination } from 'swiper/modules'
+import 'swiper/css'
 
 export default function LandingPage() {
   const {
@@ -140,7 +140,7 @@ export default function LandingPage() {
         label='멤버 배정하기'
         size='large_block'
         theme='fill_gradient'
-        style={{ position: 'absolute', bottom: '40px' }}
+        style={{ position: 'absolute', bottom: '50px' }}
         onClick={isModalToggle}
       />
       <Snackbar
@@ -257,17 +257,14 @@ const MobileCardWrapper = styled.div`
     align-items: center;
     justify-content: center;
     border-radius: 18px;
-    font-size: 22px;
     overflow: visible;
-    font-weight: bold;
-    color: #fff;
   }
 `
 
 const MobileCardSkeleton = styled.div`
   width: 240px;
   height: 320px;
-  margin: 50px 13px;
+  margin: 0px 13px;
   padding: 16px;
   box-sizing: border-box;
   background-size: cover;
