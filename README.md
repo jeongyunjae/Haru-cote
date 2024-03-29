@@ -6,8 +6,6 @@
 - 프로젝트 실행: yarn dev
 
 ## 주요 기술 스택
-
-### 모듈 번들러
 - "vite": "^5.0.8"
 - "react": "^18.2.0"
 - "styled-components": "6.1.8"
@@ -22,6 +20,5 @@
 - 관리자 페이지 (개발 진행 중)
 
 ## 사용한 FE 방법론
-- Composition Component (합성 컴포넌트)
 - Custom Hook (커스텀 훅)
-- Funnel paging (퍼널 페이징 기법)
+- Funnel paging (퍼널 페이징)
